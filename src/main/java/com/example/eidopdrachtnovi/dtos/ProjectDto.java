@@ -1,20 +1,11 @@
 package com.example.eidopdrachtnovi.dtos;
 
-// Deze klasse wordt gebruikt in je Get, Post en Put methodes. Overal waat je een Television als returnwaarde wilt geven.
-// Een input DTO behoet geen validatie
-
-
 public class ProjectDto {
     private Long id;
     private String name;
     private String projectManager;
     private String studioMember;
 
-
-
-    // We gebruiken nu geen all-args-constructor, java maakt automatisch al een no-args-constructor. Dus we hoeven geen constructor te maken.
-    // Als we wel een all-args-constructor willen gebruiken (bijvoorbeeld in de service.translatetoDto() methode), dan
-    // zullen we ook een no-args methode moeten maken, omdat java deze dan niet meer automatisch maakt.
 
     public ProjectDto() {
     }
