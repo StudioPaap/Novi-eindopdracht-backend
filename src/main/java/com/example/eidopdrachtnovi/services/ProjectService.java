@@ -13,14 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 @Service
 public class ProjectService {
 
 
     private static ProjectRepository projectRepository;
 
-    public ProjectService(ProjectRepository projectRepository){
+    public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
@@ -29,7 +28,7 @@ public class ProjectService {
         List<Project> pjList = projectRepository.findAll();
         List<ProjectDto> pjDtoList = new ArrayList<>();
 
-        for(Project pj : pjList) {
+        for (Project pj : pjList) {
             ProjectDto dto = transferToDto(pj);
             pjDtoList.add(dto);
         }
@@ -40,7 +39,7 @@ public class ProjectService {
         List<Project> pjList = projectRepository.getAllProjectsByStudioMemberEqualsIgnoreCase(studioMember);
         List<ProjectDto> pjDtoList = new ArrayList<>();
 
-        for(Project pj : pjList) {
+        for (Project pj : pjList) {
             ProjectDto dto = transferToDto(pj);
             pjDtoList.add(dto);
         }
@@ -49,7 +48,7 @@ public class ProjectService {
 
     public ProjectDto getProjectById(Long id) {
         Optional<Project> projectOptional = projectRepository.findById(id);
-        if (projectOptional.isPresent()){
+        if (projectOptional.isPresent()) {
             Project pj = projectOptional.get();
             return transferToDto(pj);
         } else {
@@ -75,7 +74,7 @@ public class ProjectService {
     public ProjectDto updateProject(Long id, ProjectInputDto newProject) {
 
         Optional<Project> projectOptional = projectRepository.findById(id);
-        if (projectOptional.isPresent()){
+        if (projectOptional.isPresent()) {
 
             Project project1 = projectOptional.get();
 
@@ -91,14 +90,14 @@ public class ProjectService {
 
         } else {
 
-            throw new  RecordNotFoundException("geen project gevonden");
+            throw new RecordNotFoundException("geen project gevonden");
 
         }
 
     }
 
     // Dit is de vertaal methode van TelevisionInputDto naar Television.
-    public Project transferToProject(ProjectInputDto dto){
+    public Project transferToProject(ProjectInputDto dto) {
         var project = new Project();
 
         project.setName(dto.getName());
@@ -111,7 +110,7 @@ public class ProjectService {
     }
 
     // Dit is de vertaal methode van Television naar TelevisionDto
-    public ProjectDto transferToDto(Project project){
+    public ProjectDto transferToDto(Project project) {
         ProjectDto dto = new ProjectDto();
 
         dto.setId(project.getId());

@@ -28,4 +28,60 @@ public class DeelOpdrachtDto {
         this.Feedback = feedback;
         this.status = status;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getKopij() {
+        return kopij;
+    }
+
+    public void setKopij(String kopij) {
+        this.kopij = kopij;
+    }
+
+    public String getDeadlineFirstVersion() {
+        return deadlineFirstVersion;
+    }
+
+    public void setDeadlineFirstVersion(String deadlineFirstVersion) {
+        this.deadlineFirstVersion = deadlineFirstVersion;
+    }
+
+    public String getDeadlineSecVersion() {
+        return deadlineSecVersion;
+    }
+
+    public void setDeadlineSecVersion(String deadlineSecVersion) {
+        this.deadlineSecVersion = deadlineSecVersion;
+    }
+
+    public String getDeadlineDef() {
+        return deadlineDef;
+    }
+
+    public void setDeadlineDef(String deadlineDef) {
+        this.deadlineDef = deadlineDef;
+    }
+
+    public String getFeedback() {
+        return Feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        Feedback = feedback;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
