@@ -1,5 +1,6 @@
 package com.example.eidopdrachtnovi.models;
 
+import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -20,8 +21,8 @@ public class DeelOpdrachtPrint extends DeelOpdracht {
 
     //constructor 2
 
-    public DeelOpdrachtPrint(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, String printer) {
-        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status);
+    public DeelOpdrachtPrint(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Project project, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, String printer) {
+        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, project);
         this.sizeWidthMM = sizeWidthMM;
         this.sizeLengthMM = sizeLengthMM;
         this.bleed = bleed;

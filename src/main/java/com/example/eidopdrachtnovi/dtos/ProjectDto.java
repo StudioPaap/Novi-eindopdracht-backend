@@ -1,11 +1,14 @@
 package com.example.eidopdrachtnovi.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProjectDto {
     private Long id;
     private String name;
     private String projectManager;
     private String studioMember;
-
+    public List<String> deelopdrachtNamen = new ArrayList<>();
 
     public ProjectDto() {
     }
@@ -49,5 +52,13 @@ public class ProjectDto {
 
     public void setStudioMember(String studioMember) {
         this.studioMember = studioMember;
+    }
+
+    public List<String> getDeelopdrachtNamen() {
+        return deelopdrachtNamen;
+    }
+
+    public void setDeelopdrachtNamen(List<String> deelopdrachtNamen) {
+        this.deelopdrachtNamen = deelopdrachtNamen;
     }
 }

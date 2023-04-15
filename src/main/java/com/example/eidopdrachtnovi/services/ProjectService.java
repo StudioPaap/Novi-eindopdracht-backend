@@ -3,6 +3,7 @@ package com.example.eidopdrachtnovi.services;
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
+import com.example.eidopdrachtnovi.models.DeelOpdracht;
 import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class ProjectService {
         }
         return pjDtoList;
     }
+
 
     public List<ProjectDto> getAllProjectsByStudioMember(String studioMember) {
         List<Project> pjList = projectRepository.getAllProjectsByStudioMemberEqualsIgnoreCase(studioMember);
@@ -77,8 +79,6 @@ public class ProjectService {
         if (projectOptional.isPresent()) {
 
             Project project1 = projectOptional.get();
-
-
             project1.setName(newProject.getName());
             project1.setDate(newProject.getDate());
             project1.setProjectManager(newProject.getProjectManager());
@@ -96,7 +96,6 @@ public class ProjectService {
 
     }
 
-    // Dit is de vertaal methode van TelevisionInputDto naar Television.
     public Project transferToProject(ProjectInputDto dto) {
         var project = new Project();
 
@@ -105,11 +104,14 @@ public class ProjectService {
         project.setProjectManager(dto.getProjectManager());
         project.setStudioMember(dto.getStudioMember());
 
+        // hier moet de add.deelopdrachten
+
+
 
         return project;
     }
 
-    // Dit is de vertaal methode van Television naar TelevisionDto
+
     public ProjectDto transferToDto(Project project) {
         ProjectDto dto = new ProjectDto();
 

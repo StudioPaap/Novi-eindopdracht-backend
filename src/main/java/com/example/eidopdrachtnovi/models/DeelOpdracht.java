@@ -1,9 +1,7 @@
 package com.example.eidopdrachtnovi.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDto;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -26,13 +24,18 @@ Long id;
   public Status status;
 
 
+  @ManyToOne
+  @JoinColumn(name = "project_id")
+  private Project project;
+
+
   // Een default constructor
   public DeelOpdracht() {
   }
 
   // Een uitgebreide constructor
 
-  public DeelOpdracht(String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status){
+  public DeelOpdracht(String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Project project){
     this.name = name;
     this.kopij = kopij;
     this.deadlineFirstVersion=deadline1;
@@ -40,6 +43,8 @@ Long id;
     this.deadlineDef=deadlineDef;
     this.Feedback = feedback;
     this.status = status;
+    this.project = project;
+
   }
 
 
@@ -92,5 +97,29 @@ Long id;
 
   public void setFeedback(String feedback) {
     Feedback = feedback;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Status getStatus() {
+    return status;
+  }
+
+  public void setStatus(Status status) {
+    this.status = status;
+  }
+
+  public Project getProject() {
+    return project;
+  }
+
+  public void setProject(Project project) {
+    this.project = project;
   }
 }

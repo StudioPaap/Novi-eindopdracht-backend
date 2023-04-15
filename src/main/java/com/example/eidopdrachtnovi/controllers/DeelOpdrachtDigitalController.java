@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/deelopdracht")
     public class DeelOpdrachtDigitalController {
 
 
@@ -22,7 +23,7 @@ import java.util.List;
             this.deelOpdrachtDigitalService = deelOpdrachtDigitalService;
         }
 
-    @GetMapping("/projects/{id}/deelopdracht")
+    @GetMapping("/")
         public ResponseEntity<List<DeelOpdrachtDigitalDto>> getAllDeelopdrachtenDigital() {
 
             List<DeelOpdrachtDigitalDto> dtos;
@@ -43,7 +44,7 @@ import java.util.List;
 //        }
 
 
-        @PostMapping("/deelopdracht")
+        @PostMapping()
         public ResponseEntity<DeelOpdrachtDigitalDto> addDeelOpdracht(@Valid @RequestBody DeelOpdrachtDigitalInputDto deelOpdrachtDigitalInputDto) {
 
             DeelOpdrachtDigitalDto dto = deelOpdrachtDigitalService.addDeelOpdrachtDigital(deelOpdrachtDigitalInputDto);

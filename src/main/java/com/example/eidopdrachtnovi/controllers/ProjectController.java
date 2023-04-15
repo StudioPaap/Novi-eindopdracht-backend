@@ -40,7 +40,6 @@ public class ProjectController {
 
     }
 
-    // De return waarde is ook hier een TelevisionDto in plaats van een Television
     @GetMapping("/projects/{id}")
     public ResponseEntity<ProjectDto> getProject(@PathVariable("id")Long id) {
 
@@ -54,7 +53,6 @@ public class ProjectController {
     @PostMapping("/projects")
     public ResponseEntity<ProjectDto> addProject(@Valid @RequestBody ProjectInputDto projectInputDto) {
 
-        // Hier gebruiken we weer een service methode in plaats van direct de repository aan te spreken.
         ProjectDto dto = projectService.addProject(projectInputDto);
 
         return ResponseEntity.created(null).body(dto);

@@ -16,8 +16,8 @@ public class DeelOpdrachtPrintDto extends DeelOpdrachtDto{
 
     //constructor 2
 
-    public DeelOpdrachtPrintDto(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, String printer) {
-        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status);
+    public DeelOpdrachtPrintDto(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Long projectId, Status status, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, String printer) {
+        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, projectId);
         this.sizeWidthMM = sizeWidthMM;
         this.sizeLengthMM = sizeLengthMM;
         this.bleed = bleed;

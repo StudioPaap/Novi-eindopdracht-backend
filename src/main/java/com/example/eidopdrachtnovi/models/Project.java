@@ -3,6 +3,8 @@ package com.example.eidopdrachtnovi.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Projects")
 public class Project {
@@ -16,6 +18,9 @@ public class Project {
     private String date;
     private String projectManager;
     private String studioMember;
+
+    @OneToMany(mappedBy = "project")
+    private List<DeelOpdracht> deelopdrachtenNamen;
 
 
     // Een default constructor
@@ -68,5 +73,17 @@ public class Project {
 
     public void setProjectManager(String projectManager) {
         this.projectManager = projectManager;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<DeelOpdracht> getDeelopdrachtenNamen() {
+        return deelopdrachtenNamen;
+    }
+
+    public void setDeelopdrachtenNamen(List<DeelOpdracht> deelopdrachtenNamen) {
+        this.deelopdrachtenNamen = deelopdrachtenNamen;
     }
 }
