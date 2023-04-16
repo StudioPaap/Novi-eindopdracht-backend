@@ -13,21 +13,20 @@ import java.util.Optional;
 @RestController
 public class ProjectController {
 
-    // We importeren hier (via de constructor, maar het mag ook @Autowired zijn) nu de Service in plaats van direct de Repository.
     private final ProjectService projectService;
 
 
-    public ProjectController( ProjectService projectService){
+    public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
 
-    // Je ziet dat de return waarde van deze methode nu ResponseEntity<List<TelevisionDto>> is in plaats van <ResponseEntity<List<Television>>
+
     @GetMapping("/projects")
     public ResponseEntity<List<ProjectDto>> getAllProjects(@RequestParam(value = "studioMember", required = false) Optional<String> studioMember) {
 
         List<ProjectDto> dtos;
 
-        if (studioMember.isEmpty()){
+        if (studioMember.isEmpty()) {
 
             dtos = projectService.getAllProjects();
 
@@ -41,7 +40,7 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{id}")
-    public ResponseEntity<ProjectDto> getProject(@PathVariable("id")Long id) {
+    public ResponseEntity<ProjectDto> getProject(@PathVariable("id") Long id) {
 
         ProjectDto project = projectService.getProjectById(id);
 

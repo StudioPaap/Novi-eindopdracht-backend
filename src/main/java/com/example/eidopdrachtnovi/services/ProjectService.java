@@ -118,8 +118,10 @@ public class ProjectService {
         dto.setId(project.getId());
         dto.setName(project.getName());
         dto.setProjectManager(project.getProjectManager());
-        dto.setStudioMember(project.getName());
+        dto.setStudioMember(project.getStudioMember());
+
 
         return dto;
     }
+
 }
