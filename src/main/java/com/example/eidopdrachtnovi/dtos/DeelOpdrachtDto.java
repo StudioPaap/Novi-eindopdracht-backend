@@ -11,7 +11,7 @@ public class DeelOpdrachtDto {
     private String deadlineDef;
     private String Feedback;
     public Status status;
-
+    public Long projectId;
 
     // Een default constructor
     public DeelOpdrachtDto() {
@@ -19,7 +19,7 @@ public class DeelOpdrachtDto {
 
     // Een uitgebreide constructor
 
-    public DeelOpdrachtDto(String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status){
+    public DeelOpdrachtDto(String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Long projectId ){
         this.name = name;
         this.kopij = kopij;
         this.deadlineFirstVersion=deadline1;
@@ -27,6 +27,7 @@ public class DeelOpdrachtDto {
         this.deadlineDef=deadlineDef;
         this.Feedback = feedback;
         this.status = status;
+        this.projectId = projectId;
     }
 
     public String getName() {

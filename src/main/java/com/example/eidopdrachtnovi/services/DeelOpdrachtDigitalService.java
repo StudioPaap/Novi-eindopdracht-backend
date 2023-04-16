@@ -1,25 +1,26 @@
 package com.example.eidopdrachtnovi.services;
 
 import com.example.eidopdrachtnovi.dtos.*;
-import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
 import com.example.eidopdrachtnovi.models.DeelOpdrachtDigital;
+import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.repositories.DeelOpdrachtDigitalRepository;
+import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
 public class DeelOpdrachtDigitalService {
 
-    private static DeelOpdrachtDigitalRepository deelOpdrachtDigitalRepository;
+    private final DeelOpdrachtDigitalRepository deelOpdrachtDigitalRepository;
+    private final ProjectRepository projectRepository;
 
-    public DeelOpdrachtDigitalService(DeelOpdrachtDigitalRepository deelOpdrachtDigitalRepository) {
+    public DeelOpdrachtDigitalService(DeelOpdrachtDigitalRepository deelOpdrachtDigitalRepository, ProjectRepository projectRepository) {
         this.deelOpdrachtDigitalRepository = deelOpdrachtDigitalRepository;
+        this.projectRepository = projectRepository;
     }
 
 
@@ -60,6 +61,8 @@ public class DeelOpdrachtDigitalService {
 
         DeelOpdrachtDigital dod = transferToDeelopdrachtDigital(dto);
         deelOpdrachtDigitalRepository.save(dod);
+
+
 
         return transferToDto(dod);
     }
@@ -114,6 +117,8 @@ public class DeelOpdrachtDigitalService {
         deelOpdrachtDigital.setSizePX(dto.getSizePX());
         deelOpdrachtDigital.setFileFormat(dto.getFileFormat());
         deelOpdrachtDigital.setAnimation(dto.isAnimation());
+        Project project = projectRepository.findById(dto.projectId).get();
+        deelOpdrachtDigital.setProject(project);
 
 
         return deelOpdrachtDigital;
@@ -133,6 +138,8 @@ public class DeelOpdrachtDigitalService {
         dto.setFileFormat(dto.getFileFormat());
         dto.setAnimation(dto.isAnimation());
 
+
         return dto;
     }
+
 }

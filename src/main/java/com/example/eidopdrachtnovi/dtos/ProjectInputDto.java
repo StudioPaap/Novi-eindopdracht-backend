@@ -3,6 +3,9 @@ package com.example.eidopdrachtnovi.dtos;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProjectInputDto {
 
     @NotNull(message = "Name is required")
@@ -12,6 +15,7 @@ public class ProjectInputDto {
     private String date;
     private String projectManager;
     private String studioMember;
+    public List<String> deelopdrachtenNamen = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -43,6 +47,14 @@ public class ProjectInputDto {
 
     public void setStudioMember(String studioMember) {
         this.studioMember = studioMember;
+    }
+
+    public List<String> getDeelopdrachtenNamen() {
+        return deelopdrachtenNamen;
+    }
+
+    public void setDeelopdrachtenNamen(List<String> deelopdrachtenNamen) {
+        this.deelopdrachtenNamen = deelopdrachtenNamen;
     }
 }
 

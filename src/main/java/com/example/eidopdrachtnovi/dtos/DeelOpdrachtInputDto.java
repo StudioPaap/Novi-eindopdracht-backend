@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class DeelOpdrachtInputDto {
 
-    @NotNull(message = "Name is required")
     private String name;
     private String kopij;
     private String deadlineFirstVersion ;
@@ -14,6 +13,8 @@ public class DeelOpdrachtInputDto {
     private String deadlineDef;
     private String Feedback;
     public Status status;
+    public Long projectId;
+
 
     public String getName() {
         return name;
@@ -69,5 +70,13 @@ public class DeelOpdrachtInputDto {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }

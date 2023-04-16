@@ -1,5 +1,6 @@
 package com.example.eidopdrachtnovi.models;
 
+import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -16,8 +17,8 @@ public class DeelOpdrachtDigital extends DeelOpdracht {
 
     //constructor 2
 
-    public DeelOpdrachtDigital(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, String sixePX, boolean animation, String fileFormat){
-        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status);
+    public DeelOpdrachtDigital(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Project project, String sixePX, boolean animation, String fileFormat){
+        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, project);
         this.sizePX = sixePX;
         this.animation= animation;
         this.fileFormat= fileFormat;
