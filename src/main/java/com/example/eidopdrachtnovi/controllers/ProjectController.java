@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("/project")
 @RestController
 public class ProjectController {
 
@@ -21,7 +22,7 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/projects")
+    @GetMapping()
     public ResponseEntity<List<ProjectDto>> getAllProjects(@RequestParam(value = "studioMember", required = false) Optional<String> studioMember) {
 
         List<ProjectDto> dtos;
@@ -39,7 +40,7 @@ public class ProjectController {
 
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProjectDto> getProject(@PathVariable("id") Long id) {
 
         ProjectDto project = projectService.getProjectById(id);

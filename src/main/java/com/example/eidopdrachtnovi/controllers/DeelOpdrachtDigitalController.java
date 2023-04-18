@@ -23,7 +23,7 @@ import java.util.List;
             this.deelOpdrachtDigitalService = deelOpdrachtDigitalService;
         }
 
-    @GetMapping("/")
+    @GetMapping()
         public ResponseEntity<List<DeelOpdrachtDigitalDto>> getAllDeelopdrachtenDigital() {
 
             List<DeelOpdrachtDigitalDto> dtos;

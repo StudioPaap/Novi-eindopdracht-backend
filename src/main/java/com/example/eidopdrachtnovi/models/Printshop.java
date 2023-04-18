@@ -3,6 +3,8 @@ package com.example.eidopdrachtnovi.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
+
+@Entity
 // variabele
 public class Printshop {
     @Id
@@ -10,11 +12,10 @@ public class Printshop {
     private Long id;
     private String name;
     private String adress;
-    private Email email;
+    private String email;
     private Long phonenumber;
 
-    @ManyToOne
-    @JoinColumn(name = "deelOpdrachtPrint_id")
+    @OneToOne (mappedBy = "printer")
     private DeelOpdrachtPrint deelOpdrachtPrint;
 
 
@@ -25,7 +26,7 @@ public class Printshop {
 
     // uitgebreide constructor
 
-    public Printshop(String name, String adress, Email email, Long phonenumber, DeelOpdrachtPrint deelOpdrachtPrint) {
+    public Printshop(String name, String adress, String email, Long phonenumber, DeelOpdrachtPrint deelOpdrachtPrint) {
         this.name = name;
         this.adress = adress;
         this.email = email;
@@ -52,7 +53,7 @@ public class Printshop {
         return deelOpdrachtPrint;
     }
 
-    public Email getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -78,7 +79,7 @@ public class Printshop {
         this.deelOpdrachtPrint = deelOpdrachtPrint;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

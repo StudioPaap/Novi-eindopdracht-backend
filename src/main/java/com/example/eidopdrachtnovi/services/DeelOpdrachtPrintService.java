@@ -113,7 +113,6 @@ public class DeelOpdrachtPrintService {
         deelOpdrachtPrint.setSizeLengthMM(dto.getSizeLengthMM());
         deelOpdrachtPrint.setBleed(dto.getBleed());
         deelOpdrachtPrint.setCutLines(dto.isCutLines());
-        deelOpdrachtPrint.setPrinter(dto.getPrinter());
 
 
 

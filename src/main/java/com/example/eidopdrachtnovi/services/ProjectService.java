@@ -36,7 +36,6 @@ public class ProjectService {
         return pjDtoList;
     }
 
-
     public List<ProjectDto> getAllProjectsByStudioMember(String studioMember) {
         List<Project> pjList = projectRepository.getAllProjectsByStudioMemberEqualsIgnoreCase(studioMember);
         List<ProjectDto> pjDtoList = new ArrayList<>();
