@@ -3,7 +3,7 @@ package com.example.eidopdrachtnovi.dtos;
 import com.example.eidopdrachtnovi.models.Status;
 
 public class DeelOpdrachtDto {
-
+    private Long id;
     private String name;
     private String kopij;
     private String deadlineFirstVersion ;
@@ -29,6 +29,8 @@ public class DeelOpdrachtDto {
         this.status = status;
         this.projectId = projectId;
     }
+
+
 
     public String getName() {
         return name;

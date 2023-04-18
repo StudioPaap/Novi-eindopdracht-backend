@@ -2,10 +2,11 @@ package com.example.eidopdrachtnovi.services;
 
 import com.example.eidopdrachtnovi.dtos.*;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
-import com.example.eidopdrachtnovi.models.DeelOpdrachtDigital;
-import com.example.eidopdrachtnovi.models.DeelOpdrachtPrint;
-import com.example.eidopdrachtnovi.models.Status;
+import com.example.eidopdrachtnovi.models.*;
 import com.example.eidopdrachtnovi.repositories.DeelOpdrachtPrintRepository;
+import com.example.eidopdrachtnovi.repositories.PrintshopRepository;
+import com.example.eidopdrachtnovi.repositories.ProjectRepository;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,9 +19,13 @@ import java.util.Optional;
 public class DeelOpdrachtPrintService {
 
     private static DeelOpdrachtPrintRepository deelOpdrachtPrintRepository;
+    private final ProjectRepository projectRepository;
+    private PrintshopRepository printshopRepository;
 
-    public DeelOpdrachtPrintService(DeelOpdrachtPrintRepository deelOpdrachtPrintRepository) {
+    public DeelOpdrachtPrintService(DeelOpdrachtPrintRepository deelOpdrachtPrintRepository, ProjectRepository projectRepository, PrintshopRepository printshopRepository) {
         this.deelOpdrachtPrintRepository = deelOpdrachtPrintRepository;
+        this.printshopRepository = printshopRepository;
+        this.projectRepository = projectRepository;
     }
 
 
@@ -88,6 +93,7 @@ public class DeelOpdrachtPrintService {
             deelOpdrachtPrint1.setBleed(newDeelopdrachtPrint.getBleed());
             deelOpdrachtPrint1.setCutLines(newDeelopdrachtPrint.isCutLines());
 
+
             DeelOpdrachtPrint returnDeelopdrachtPrint = deelOpdrachtPrintRepository.save(deelOpdrachtPrint1);
 
             return transferToDto(returnDeelopdrachtPrint);
@@ -114,6 +120,11 @@ public class DeelOpdrachtPrintService {
         deelOpdrachtPrint.setSizeLengthMM(dto.getSizeLengthMM());
         deelOpdrachtPrint.setBleed(dto.getBleed());
         deelOpdrachtPrint.setCutLines(dto.isCutLines());
+        Project project = projectRepository.findById(dto.projectId).get();
+        deelOpdrachtPrint.setProject(project);
+
+        Printshop printshop = printshopRepository.findById(dto.printshop).get();
+        deelOpdrachtPrint.setPrintshop(printshop);
 
 
         return deelOpdrachtPrint;
@@ -133,7 +144,7 @@ public class DeelOpdrachtPrintService {
         dto.setSizeLengthMM(dto.getSizeLengthMM());
         dto.setBleed(dto.getBleed());
         dto.setCutLines(dto.isCutLines());
-        dto.setPrinter(dto.getPrinter());
+        dto.setPrintshop(dto.getPrintshop());
         return dto;
     }
 }

@@ -11,7 +11,7 @@ public class DeelOpdrachtInputDto {
     private String deadlineSecVersion;
     @NotNull(message = "Deadline is required")
     private String deadlineDef;
-    private String Feedback;
+    private String feedback;
     public Status status;
     public Long projectId;
 
@@ -57,11 +57,11 @@ public class DeelOpdrachtInputDto {
     }
 
     public String getFeedback() {
-        return Feedback;
+        return feedback;
     }
 
     public void setFeedback(String feedback) {
-        Feedback = feedback;
+        feedback = feedback;
     }
 
     public Status getStatus() {

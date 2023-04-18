@@ -15,7 +15,7 @@ public class Printshop {
     private String email;
     private Long phonenumber;
 
-    @OneToOne (mappedBy = "printer")
+    @OneToOne (mappedBy = "printshop")
     private DeelOpdrachtPrint deelOpdrachtPrint;
 
 
