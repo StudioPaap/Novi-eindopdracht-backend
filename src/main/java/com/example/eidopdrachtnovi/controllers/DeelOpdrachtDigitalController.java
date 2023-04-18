@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/deelopdracht")
+@RequestMapping("/deelopdrachtdigital")
     public class DeelOpdrachtDigitalController {
 
 
@@ -33,19 +33,19 @@ import java.util.List;
         return ResponseEntity.ok().body(dtos);
         }
 
-//        // De return waarde is ook hier een TelevisionDto in plaats van een Television
-//        @GetMapping("/projects/{id}")
-//        public ResponseEntity<ProjectDto> getProject(@PathVariable("id")Long id) {
-//
-//            ProjectDto project = deelOpdrachtDigitalService.getProjectById(id);
-//
-//            return ResponseEntity.ok().body(project);
-//
-//        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalById(@PathVariable("id")Long id) {
+
+            DeelOpdrachtDigitalDto deelOpdrachtDigital = deelOpdrachtDigitalService.getDeelOpdrachtDigitalById(id);
+
+            return ResponseEntity.ok().body(deelOpdrachtDigital);
+
+        }
 
 
         @PostMapping()
-        public ResponseEntity<DeelOpdrachtDigitalDto> addDeelOpdracht(@Valid @RequestBody DeelOpdrachtDigitalInputDto deelOpdrachtDigitalInputDto) {
+        public ResponseEntity<DeelOpdrachtDigitalDto> addDeelOpdrachtDigital(@Valid @RequestBody DeelOpdrachtDigitalInputDto deelOpdrachtDigitalInputDto) {
 
             DeelOpdrachtDigitalDto dto = deelOpdrachtDigitalService.addDeelOpdrachtDigital(deelOpdrachtDigitalInputDto);
 
@@ -54,22 +54,22 @@ import java.util.List;
         }
 
 
-//        @DeleteMapping("/projects/{id}/deelopdracht/{id}")
-//        public ResponseEntity<Object> deleteDeelOpdrachtDigital(@PathVariable Long id) {
-//
-//            DeelOpdrachtDigitalService.deleteDeelOpdrachtDigital(id);
-//
-//            return ResponseEntity.noContent().build();
-//
-//        }
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Object> deleteDeelOpdrachtDigital(@PathVariable Long id) {
 
-//
-//        @PutMapping("/projects/{id}/deelopdracht/{id}")
-//        public ResponseEntity<DeelOpdrachtDigitalDto> updateDeelOpdrachtDigital(@PathVariable Long id, @Valid @RequestBody DeelOpdrachtDigitalInputDto newDeelOpdrachtDigital) {
-//            DeelOpdrachtDigitalDto dto = deelOpdrachtDigitalService.updateDeelOpdrachtDigital(id, newDeelOpdrachtDigital);
-//
-//            return ResponseEntity.ok().body(dto);
-//        }
+            deelOpdrachtDigitalService.deleteDeelOpdrachtDigital(id);
+
+            return ResponseEntity.noContent().build();
+
+        }
+
+
+        @PutMapping("{id}")
+        public ResponseEntity<DeelOpdrachtDigitalDto> updateDeelOpdrachtDigital(@PathVariable Long id, @Valid @RequestBody DeelOpdrachtDigitalInputDto newDeelOpdrachtDigital) {
+            DeelOpdrachtDigitalDto dto = deelOpdrachtDigitalService.updateDeelOpdrachtDigital(id, newDeelOpdrachtDigital);
+
+            return ResponseEntity.ok().body(dto);
+        }
 
     }
 

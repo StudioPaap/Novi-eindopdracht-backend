@@ -2,6 +2,7 @@ package com.example.eidopdrachtnovi.services;
 
 import com.example.eidopdrachtnovi.dtos.*;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
+import com.example.eidopdrachtnovi.models.DeelOpdrachtDigital;
 import com.example.eidopdrachtnovi.models.DeelOpdrachtPrint;
 import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.repositories.DeelOpdrachtPrintRepository;
@@ -45,15 +46,15 @@ public class DeelOpdrachtPrintService {
         return dopDtoList;
     }
 
-//    public DeelOpdrachtPrintDto getDeelOpdrachtPrintById(Long id) {
-//        Optional<DeelOpdrachtPrint> deelOpdrachtPrintOptional = deelOpdrachtPrintRepository.findById(id);
-//        if (deelOpdrachtPrintOptional.isPresent()) {
-//            DeelOpdrachtPrint dop = deelOpdrachtPrintOptional.get();
-//            return transferToDto(dop);
-//        } else {
-//            throw new RecordNotFoundException("geen deelopdracht gevonden");
-//        }
-//    }
+    public DeelOpdrachtPrintDto getDeelOpdrachtPrintById(Long id) {
+        Optional<DeelOpdrachtPrint> deelOpdrachtPrintOptional = deelOpdrachtPrintRepository.findById(id);
+        if (deelOpdrachtPrintOptional.isPresent()) {
+            DeelOpdrachtPrint dop = deelOpdrachtPrintOptional.get();
+            return transferToDto(dop);
+        } else {
+            throw new RecordNotFoundException("geen deelopdracht gevonden");
+        }
+    }
 
 
     public DeelOpdrachtPrintDto addDeelOpdrachtPrint(DeelOpdrachtPrintInputDto dto) {
@@ -64,40 +65,40 @@ public class DeelOpdrachtPrintService {
         return transferToDto(dop);
     }
 
-//    public static void deleteDeelOpdrachtPrint(@RequestBody Long id) {
-//
-//        deelOpdrachtPrintRepository.deleteById(id);
-//
-//    }
+    public static void deleteDeelOpdrachtPrint(@RequestBody Long id) {
 
-//    public DeelOpdrachtPrintDto updateDeelOpdrachtPrint(Long id, DeelOpdrachtPrintInputDto newDeelopdrachtPrint) {
-//
-//        Optional<DeelOpdrachtPrint> DeelOpdrachtPrintOptional = deelOpdrachtPrintRepository.findById(id);
-//        if (DeelOpdrachtPrintOptional.isPresent()) {
-//
-//            DeelOpdrachtPrint deelOpdrachtPrint1 = DeelOpdrachtPrintOptional.get();
-// deelOpdrachtPrint1.setName(newDeelopdrachtPrint.getName());
-// deelOpdrachtPrint1.setKopij(newDeelopdrachtPrint.getKopij());
-// deelOpdrachtPrint1.setDeadlineFirstVersion(newDeelopdrachtPrint.getDeadlineFirstVersion());
-// deelOpdrachtPrint1.setDeadlineSecVersion(newDeelopdrachtPrint.getDeadlineSecVersion());
-// deelOpdrachtPrint1.setDeadlineDef(newDeelopdrachtPrint.getDeadlineDef());
-// deelOpdrachtPrint1.setFeedback(newDeelopdrachtPrint.getFeedback());
-// deelOpdrachtPrint1.setSizePX(newDeelopdrachtPrint.getSizePX());
-// deelOpdrachtPrint1.setFileFormat(newDeelopdrachtPrint.getFileFormat());
-// deelOpdrachtPrint1.setAnimation(newDeelopdrachtPrint.isAnimation());
-// ;
-//
-// DeelOpdrachtPrint returnDeelopdrachtPrint = deelOpdrachtPrintRepository.save(deelOpdrachtPrint1);
-//
-// return transferToDto(returnDeelopdrachtPrint);
-//
-// } else {
-//
-// throw new RecordNotFoundException("geen Deelopdracht gevonden");
-//
-// }
-//
-// }
+        deelOpdrachtPrintRepository.deleteById(id);
+
+    }
+
+    public DeelOpdrachtPrintDto updateDeelOpdrachtPrint(Long id, DeelOpdrachtPrintInputDto newDeelopdrachtPrint) {
+
+        Optional<DeelOpdrachtPrint> DeelOpdrachtPrintOptional = deelOpdrachtPrintRepository.findById(id);
+        if (DeelOpdrachtPrintOptional.isPresent()) {
+
+            DeelOpdrachtPrint deelOpdrachtPrint1 = DeelOpdrachtPrintOptional.get();
+            deelOpdrachtPrint1.setName(newDeelopdrachtPrint.getName());
+            deelOpdrachtPrint1.setKopij(newDeelopdrachtPrint.getKopij());
+            deelOpdrachtPrint1.setDeadlineFirstVersion(newDeelopdrachtPrint.getDeadlineFirstVersion());
+            deelOpdrachtPrint1.setDeadlineSecVersion(newDeelopdrachtPrint.getDeadlineSecVersion());
+            deelOpdrachtPrint1.setDeadlineDef(newDeelopdrachtPrint.getDeadlineDef());
+            deelOpdrachtPrint1.setFeedback(newDeelopdrachtPrint.getFeedback());
+            deelOpdrachtPrint1.setSizeWidthMM(newDeelopdrachtPrint.getSizeWidthMM());
+            deelOpdrachtPrint1.setSizeLengthMM(newDeelopdrachtPrint.getSizeLengthMM());
+            deelOpdrachtPrint1.setBleed(newDeelopdrachtPrint.getBleed());
+            deelOpdrachtPrint1.setCutLines(newDeelopdrachtPrint.isCutLines());
+
+            DeelOpdrachtPrint returnDeelopdrachtPrint = deelOpdrachtPrintRepository.save(deelOpdrachtPrint1);
+
+            return transferToDto(returnDeelopdrachtPrint);
+
+        } else {
+
+            throw new RecordNotFoundException("geen Deelopdracht gevonden");
+
+        }
+
+    }
 
     // Dit is de vertaal methode van DeelOpdrachtPrintInputDto naar DeelOpdrachtPrint.
     public DeelOpdrachtPrint transferToDeelopdrachtPrint(DeelOpdrachtPrintInputDto dto) {
@@ -113,7 +114,6 @@ public class DeelOpdrachtPrintService {
         deelOpdrachtPrint.setSizeLengthMM(dto.getSizeLengthMM());
         deelOpdrachtPrint.setBleed(dto.getBleed());
         deelOpdrachtPrint.setCutLines(dto.isCutLines());
-
 
 
         return deelOpdrachtPrint;

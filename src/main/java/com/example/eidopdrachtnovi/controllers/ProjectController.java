@@ -50,7 +50,7 @@ public class ProjectController {
     }
 
 
-    @PostMapping("/projects")
+    @PostMapping()
     public ResponseEntity<ProjectDto> addProject(@Valid @RequestBody ProjectInputDto projectInputDto) {
 
         ProjectDto dto = projectService.addProject(projectInputDto);

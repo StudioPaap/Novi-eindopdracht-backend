@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DeelOpdrachtPrintRepository extends JpaRepository<DeelOpdrachtPrint, Status> {
+public interface DeelOpdrachtPrintRepository extends JpaRepository<DeelOpdrachtPrint, Long> {
 
     List<DeelOpdrachtPrint> getAllDeelOpdrachtByStatus(Status status);
 }

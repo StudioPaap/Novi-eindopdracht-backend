@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@RequestMapping("/deelopdrachtprint")
 @RestController
 public class DeelOpdrachtPrintController {
 
@@ -22,7 +22,7 @@ public class DeelOpdrachtPrintController {
         this.deelOpdrachtPrintService = deelOpdrachtPrintService;
     }
 
-    @GetMapping("/projects/{id}/deelopdrachtprint")
+    @GetMapping()
     public ResponseEntity<List<DeelOpdrachtPrintDto>> getAllDeelopdrachtenPrint() {
 
         List<DeelOpdrachtPrintDto> dtos;
@@ -32,19 +32,19 @@ public class DeelOpdrachtPrintController {
         return ResponseEntity.ok().body(dtos);
     }
 
-//    // De return waarde is ook hier een TelevisionDto in plaats van een Television
-//    @GetMapping("/projects/{id}")
-//    public ResponseEntity<ProjectDto> getProject(@PathVariable("id")Long id) {
-//
-//        ProjectDto project = deelOpdrachtPrintService.getProjectById(id);
-//
-//        return ResponseEntity.ok().body(project);
-//
-//    }
+
+    @GetMapping("/id")
+    public ResponseEntity<DeelOpdrachtPrintDto> getDeelOpdrachtPrintById(@PathVariable("id")Long id) {
+
+        DeelOpdrachtPrintDto deelOpdrachtPrintDto = deelOpdrachtPrintService.getDeelOpdrachtPrintById(id);
+
+        return ResponseEntity.ok().body(deelOpdrachtPrintDto);
+
+    }
 
 
-    @PostMapping("/deelopdrachtprint")
-    public ResponseEntity<DeelOpdrachtPrintDto> addDeelOpdracht(@Valid @RequestBody DeelOpdrachtPrintInputDto deelOpdrachtPrintInputDto) {
+    @PostMapping()
+    public ResponseEntity<DeelOpdrachtPrintDto> addDeelOpdrachtPrint(@Valid @RequestBody DeelOpdrachtPrintInputDto deelOpdrachtPrintInputDto) {
 
         DeelOpdrachtPrintDto dto = deelOpdrachtPrintService.addDeelOpdrachtPrint(deelOpdrachtPrintInputDto);
 
@@ -53,21 +53,21 @@ public class DeelOpdrachtPrintController {
     }
 
 
-//    @DeleteMapping("/projects/{id}/deelopdracht/{id}")
-//    public ResponseEntity<Object> deleteDeelOpdrachtPrint(@PathVariable Long id) {
-//
-//        DeelOpdrachtPrintService.deleteDeelOpdrachtPrint(id);
-//
-//        return ResponseEntity.noContent().build();
-//
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteDeelOpdrachtPrint(@PathVariable Long id) {
 
-//
-//    @PutMapping("/projects/{id}/deelopdracht/{id}")
-//    public ResponseEntity<DeelOpdrachtPrintDto> updateDeelOpdrachtPrint(@PathVariable Long id, @Valid @RequestBody DeelOpdrachtPrintInputDto newDeelOpdrachtPrint) {
-//        DeelOpdrachtPrintDto dto = deelOpdrachtPrintService.updateDeelOpdrachtPrint(id, newDeelOpdrachtPrint);
-//
-//        return ResponseEntity.ok().body(dto);
-//    }
+        DeelOpdrachtPrintService.deleteDeelOpdrachtPrint(id);
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DeelOpdrachtPrintDto> updateDeelOpdrachtPrint(@PathVariable Long id, @Valid @RequestBody DeelOpdrachtPrintInputDto newDeelOpdrachtPrint) {
+        DeelOpdrachtPrintDto dto = deelOpdrachtPrintService.updateDeelOpdrachtPrint(id, newDeelOpdrachtPrint);
+
+        return ResponseEntity.ok().body(dto);
+    }
 
 }
