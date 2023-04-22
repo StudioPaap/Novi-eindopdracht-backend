@@ -133,18 +133,19 @@ public class DeelOpdrachtPrintService {
     // Dit is de vertaal methode van DeelOpdrachtPrint naar DeelOpdrachtPrintDto
     public DeelOpdrachtPrintDto transferToDto(DeelOpdrachtPrint deelOpdrachtPrint) {
         DeelOpdrachtPrintDto dto = new DeelOpdrachtPrintDto();
-
-        dto.setName(dto.getName());
-        dto.setKopij(dto.getKopij());
-        dto.setDeadlineFirstVersion(dto.getDeadlineFirstVersion());
-        dto.setDeadlineSecVersion(dto.getDeadlineSecVersion());
-        dto.setDeadlineDef(dto.getDeadlineDef());
-        dto.setFeedback(dto.getFeedback());
-        dto.setSizeWidthMM(dto.getSizeWidthMM());
-        dto.setSizeLengthMM(dto.getSizeLengthMM());
-        dto.setBleed(dto.getBleed());
-        dto.setCutLines(dto.isCutLines());
-        dto.setPrintshop(dto.getPrintshop());
+        dto.setId(deelOpdrachtPrint.getId());
+        dto.setName(deelOpdrachtPrint.getName());
+        dto.setKopij(deelOpdrachtPrint.getKopij());
+        dto.setDeadlineFirstVersion(deelOpdrachtPrint.getDeadlineFirstVersion());
+        dto.setDeadlineSecVersion(deelOpdrachtPrint.getDeadlineSecVersion());
+        dto.setDeadlineDef(deelOpdrachtPrint.getDeadlineDef());
+        dto.setFeedback(deelOpdrachtPrint.getFeedback());
+        dto.setSizeWidthMM(deelOpdrachtPrint.getSizeWidthMM());
+        dto.setSizeLengthMM(deelOpdrachtPrint.getSizeLengthMM());
+        dto.setBleed(deelOpdrachtPrint.getBleed());
+        dto.setCutLines(deelOpdrachtPrint.isCutLines());
+        dto.setPrintshop(deelOpdrachtPrint.getPrintshop().getId());
+        dto.setProjectId(deelOpdrachtPrint.getProject().getId());
         return dto;
     }
 }

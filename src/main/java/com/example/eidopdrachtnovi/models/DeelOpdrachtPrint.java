@@ -40,36 +40,36 @@ public class DeelOpdrachtPrint extends DeelOpdracht {
         return sizeWidthMM;
     }
 
-    public void setSizeWidthMM(int sizeWidthMM) {
-        this.sizeWidthMM = sizeWidthMM;
-    }
-
     public int getSizeLengthMM() {
         return sizeLengthMM;
-    }
-
-    public void setSizeLengthMM(int sizeLengthMM) {
-        this.sizeLengthMM = sizeLengthMM;
     }
 
     public int getBleed() {
         return bleed;
     }
 
-    public void setBleed(int bleed) {
-        this.bleed = bleed;
-    }
-
     public boolean isCutLines() {
         return cutLines;
     }
 
-    public void setCutLines(boolean cutLines) {
-        this.cutLines = cutLines;
-    }
-
     public Printshop getPrintshop() {
         return printshop;
+    }
+
+    public void setSizeWidthMM(int sizeWidthMM) {
+        this.sizeWidthMM = sizeWidthMM;
+    }
+
+    public void setSizeLengthMM(int sizeLengthMM) {
+        this.sizeLengthMM = sizeLengthMM;
+    }
+
+    public void setBleed(int bleed) {
+        this.bleed = bleed;
+    }
+
+    public void setCutLines(boolean cutLines) {
+        this.cutLines = cutLines;
     }
 
     public void setPrintshop(Printshop printshop) {

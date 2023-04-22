@@ -33,7 +33,7 @@ public class DeelOpdrachtPrintController {
     }
 
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<DeelOpdrachtPrintDto> getDeelOpdrachtPrintById(@PathVariable("id")Long id) {
 
         DeelOpdrachtPrintDto deelOpdrachtPrintDto = deelOpdrachtPrintService.getDeelOpdrachtPrintById(id);

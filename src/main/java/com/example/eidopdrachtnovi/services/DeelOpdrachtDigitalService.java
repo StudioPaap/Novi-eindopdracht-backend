@@ -108,7 +108,6 @@ public class DeelOpdrachtDigitalService {
 
     }
 
-    // Dit is de vertaal methode van DeelOpdrachtDigitalInputDto naar DeelopdrachtDigital.
     public DeelOpdrachtDigital transferToDeelopdrachtDigital(DeelOpdrachtDigitalInputDto dto) {
         var deelOpdrachtDigital = new DeelOpdrachtDigital();
 
@@ -128,19 +127,19 @@ public class DeelOpdrachtDigitalService {
         return deelOpdrachtDigital;
     }
 
-    // Dit is de vertaal methode van DeelOpdrachtDigital naar DeelOpdrachtDigitalDto
+
     public DeelOpdrachtDigitalDto transferToDto(DeelOpdrachtDigital deelOpdrachtDigital) {
         DeelOpdrachtDigitalDto dto = new DeelOpdrachtDigitalDto();
 
-        dto.setName(dto.getName());
-        dto.setKopij(dto.getKopij());
-        dto.setDeadlineFirstVersion(dto.getDeadlineFirstVersion());
-        dto.setDeadlineSecVersion(dto.getDeadlineSecVersion());
-        dto.setDeadlineDef(dto.getDeadlineDef());
-        dto.setFeedback(dto.getFeedback());
-        dto.setSizePX(dto.getSizePX());
-        dto.setFileFormat(dto.getFileFormat());
-        dto.setAnimation(dto.isAnimation());
+        dto.setName(deelOpdrachtDigital.getName());
+        dto.setKopij(deelOpdrachtDigital.getKopij());
+        dto.setDeadlineFirstVersion(deelOpdrachtDigital.getDeadlineFirstVersion());
+        dto.setDeadlineSecVersion(deelOpdrachtDigital.getDeadlineSecVersion());
+        dto.setDeadlineDef(deelOpdrachtDigital.getDeadlineDef());
+        dto.setFeedback(deelOpdrachtDigital.getFeedback());
+        dto.setSizePX(deelOpdrachtDigital.getSizePX());
+        dto.setFileFormat(deelOpdrachtDigital.getFileFormat());
+        dto.setAnimation(deelOpdrachtDigital.isAnimation());
 
 
         return dto;
