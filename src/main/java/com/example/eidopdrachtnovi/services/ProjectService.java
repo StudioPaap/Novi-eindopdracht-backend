@@ -3,8 +3,9 @@ package com.example.eidopdrachtnovi.services;
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
-import com.example.eidopdrachtnovi.models.DeelOpdracht;
+import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
 import com.example.eidopdrachtnovi.models.Project;
+import com.example.eidopdrachtnovi.repositories.BrandguideUploadDownloadRepository;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,10 @@ public class ProjectService {
 
 
     private static ProjectRepository projectRepository;
+    private static BrandguideUploadDownloadRepository brandguideUploadDownloadRepository;
 
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, BrandguideUploadDownloadRepository brandguideUploadDownloadRepository) {
+        this.brandguideUploadDownloadRepository = brandguideUploadDownloadRepository;
         this.projectRepository = projectRepository;
     }
 
@@ -72,6 +75,7 @@ public class ProjectService {
 
     }
 
+
     public ProjectDto updateProject(Long id, ProjectInputDto newProject) {
 
         Optional<Project> projectOptional = projectRepository.findById(id);
@@ -95,20 +99,34 @@ public class ProjectService {
 
     }
 
-    public Project transferToProject(ProjectInputDto dto) {
-        var project = new Project();
+//    public void assignBrandguideToProject(String brandguide, Long ProjectId) {
+//
+//        Optional<Project> optionalProject = projectRepository.findById(ProjectId);
+//
+//        Optional<BrandguideUploadResponse> brandguideUploadResponse = brandguideUploadDownloadRepository.findByBrandguideName(brandguide);
+//
+//        if (optionalProject.isPresent() && brandguideUploadResponse.isPresent()) {
+//
+//            BrandguideUploadResponse brandguide1 = brandguideUploadResponse.get();
+//
+//            Project project = optionalProject.get();
+//
+//            project.setBrandguide(brandguide1);
+//
+//            projectRepository.save(project);
+//
+//        }
+//    }
+        public Project transferToProject (ProjectInputDto dto){
+            var project = new Project();
 
-        project.setName(dto.getName());
-        project.setDate(dto.getDate());
-        project.setProjectManager(dto.getProjectManager());
-        project.setStudioMember(dto.getStudioMember());
+            project.setName(dto.getName());
+            project.setDate(dto.getDate());
+            project.setProjectManager(dto.getProjectManager());
+            project.setStudioMember(dto.getStudioMember());
 
-        // hier moet de add.deelopdrachten
-
-
-
-        return project;
-    }
+            return project;
+        }
 
 
     public ProjectDto transferToDto(Project project) {

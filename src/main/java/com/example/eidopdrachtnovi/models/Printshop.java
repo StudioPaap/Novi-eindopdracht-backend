@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 
 
 @Entity
-// variabele
+
 public class Printshop {
     @Id
     @GeneratedValue
@@ -15,16 +15,14 @@ public class Printshop {
     private String email;
     private Long phonenumber;
 
-    @OneToOne (mappedBy = "printer")
+    @OneToOne (mappedBy = "printshop")
     private DeelOpdrachtPrint deelOpdrachtPrint;
 
 
-    // constructor
 
     public Printshop(){};
 
 
-    // uitgebreide constructor
 
     public Printshop(String name, String adress, String email, Long phonenumber, DeelOpdrachtPrint deelOpdrachtPrint) {
         this.name = name;

@@ -15,7 +15,7 @@ public class DeelOpdrachtPrint extends DeelOpdracht {
     private boolean cutLines;
 
     @OneToOne
-    private Printshop printer;
+    private Printshop printshop;
 
 
     // constructor
@@ -24,13 +24,13 @@ public class DeelOpdrachtPrint extends DeelOpdracht {
 
     //constructor 2
 
-    public DeelOpdrachtPrint(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Project project, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, Printshop printer) {
+    public DeelOpdrachtPrint(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Project project, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, Printshop printshop) {
         super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, project);
         this.sizeWidthMM = sizeWidthMM;
         this.sizeLengthMM = sizeLengthMM;
         this.bleed = bleed;
         this.cutLines = cutLines;
-        this.printer = printer;
+        this.printshop = printshop;
 
     }
     //getters en setters
@@ -40,39 +40,39 @@ public class DeelOpdrachtPrint extends DeelOpdracht {
         return sizeWidthMM;
     }
 
-    public void setSizeWidthMM(int sizeWidthMM) {
-        this.sizeWidthMM = sizeWidthMM;
-    }
-
     public int getSizeLengthMM() {
         return sizeLengthMM;
-    }
-
-    public void setSizeLengthMM(int sizeLengthMM) {
-        this.sizeLengthMM = sizeLengthMM;
     }
 
     public int getBleed() {
         return bleed;
     }
 
-    public void setBleed(int bleed) {
-        this.bleed = bleed;
-    }
-
     public boolean isCutLines() {
         return cutLines;
+    }
+
+    public Printshop getPrintshop() {
+        return printshop;
+    }
+
+    public void setSizeWidthMM(int sizeWidthMM) {
+        this.sizeWidthMM = sizeWidthMM;
+    }
+
+    public void setSizeLengthMM(int sizeLengthMM) {
+        this.sizeLengthMM = sizeLengthMM;
+    }
+
+    public void setBleed(int bleed) {
+        this.bleed = bleed;
     }
 
     public void setCutLines(boolean cutLines) {
         this.cutLines = cutLines;
     }
 
-    public void setPrinter(Printshop printer) {
-        this.printer = printer;
-    }
-
-    public Printshop getPrinter() {
-        return printer;
+    public void setPrintshop(Printshop printshop) {
+        this.printshop = printshop;
     }
 }

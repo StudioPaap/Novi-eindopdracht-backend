@@ -1,5 +1,6 @@
 package com.example.eidopdrachtnovi.dtos;
 
+import com.example.eidopdrachtnovi.models.Printshop;
 import com.example.eidopdrachtnovi.models.Status;
 
 public class DeelOpdrachtPrintDto extends DeelOpdrachtDto{
@@ -7,7 +8,7 @@ public class DeelOpdrachtPrintDto extends DeelOpdrachtDto{
     private int sizeLengthMM;
     private int bleed;
     private boolean cutLines;
-    private String printer;
+    private Long printshop;
 
 
     // constructor
@@ -16,13 +17,13 @@ public class DeelOpdrachtPrintDto extends DeelOpdrachtDto{
 
     //constructor 2
 
-    public DeelOpdrachtPrintDto(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Long projectId, Status status, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, String printer) {
+    public DeelOpdrachtPrintDto(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Long projectId, Status status, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines, Long printShop) {
         super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, projectId);
         this.sizeWidthMM = sizeWidthMM;
         this.sizeLengthMM = sizeLengthMM;
         this.bleed = bleed;
         this.cutLines = cutLines;
-        this.printer = printer;
+        this.printshop = printshop;
     }
     //getters en setters
 
@@ -31,39 +32,39 @@ public class DeelOpdrachtPrintDto extends DeelOpdrachtDto{
         return sizeWidthMM;
     }
 
-    public void setSizeWidthMM(int sizeWidthMM) {
-        this.sizeWidthMM = sizeWidthMM;
-    }
-
     public int getSizeLengthMM() {
         return sizeLengthMM;
-    }
-
-    public void setSizeLengthMM(int sizeLengthMM) {
-        this.sizeLengthMM = sizeLengthMM;
     }
 
     public int getBleed() {
         return bleed;
     }
 
-    public void setBleed(int bleed) {
-        this.bleed = bleed;
-    }
-
     public boolean isCutLines() {
         return cutLines;
+    }
+
+    public Long getPrintshop() {
+        return printshop;
+    }
+
+    public void setSizeWidthMM(int sizeWidthMM) {
+        this.sizeWidthMM = sizeWidthMM;
+    }
+
+    public void setSizeLengthMM(int sizeLengthMM) {
+        this.sizeLengthMM = sizeLengthMM;
+    }
+
+    public void setBleed(int bleed) {
+        this.bleed = bleed;
     }
 
     public void setCutLines(boolean cutLines) {
         this.cutLines = cutLines;
     }
 
-    public String getPrinter() {
-        return printer;
-    }
-
-    public void setPrinter(String printer) {
-        this.printer = printer;
+    public void setPrintshop(Long printshop) {
+        this.printshop = printshop;
     }
 }

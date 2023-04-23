@@ -2,10 +2,12 @@ package com.example.eidopdrachtnovi.controllers;
 
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
+import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
 import com.example.eidopdrachtnovi.services.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class ProjectController {
 
     private final ProjectService projectService;
+    private final BrandguideUploadDownloadController controller;
 
 
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectService projectService, BrandguideUploadDownloadController controller) {
         this.projectService = projectService;
+        this.controller = controller;
     }
 
 
@@ -50,7 +54,7 @@ public class ProjectController {
     }
 
 
-    @PostMapping("/projects")
+    @PostMapping()
     public ResponseEntity<ProjectDto> addProject(@Valid @RequestBody ProjectInputDto projectInputDto) {
 
         ProjectDto dto = projectService.addProject(projectInputDto);
@@ -58,6 +62,8 @@ public class ProjectController {
         return ResponseEntity.created(null).body(dto);
 
     }
+
+
 
 
     @DeleteMapping("/projects/{id}")
@@ -71,11 +77,21 @@ public class ProjectController {
     }
 
 
-    @PutMapping("/projects/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ProjectDto> updateProject(@PathVariable Long id, @Valid @RequestBody ProjectInputDto newProject) {
         ProjectDto dto = projectService.updateProject(id, newProject);
 
         return ResponseEntity.ok().body(dto);
     }
+
+//    @PostMapping("/{id}/brandguide")
+//    public void assignBrandguideToProject(@PathVariable("id") Long projectId,
+//                                     @RequestBody MultipartFile file) {
+//
+//        BrandguideUploadResponse brandguideUploadResponse = controller.singleFileUpload(file);
+//
+//        projectService.assignBrandguideToProject(brandguideUploadResponse.getProjectBrandguide(), projectId);
+//
+//    }
 
 }

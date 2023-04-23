@@ -26,25 +26,23 @@ public class DeelOpdrachtDigitalDto extends DeelOpdrachtDto {
         return sizePX;
     }
 
-    public void setSizePX(String sizePX) {
-        this.sizePX = sizePX;
-    }
-
     public boolean isAnimation() {
         return animation;
-    }
-
-    public void setAnimation(boolean animation) {
-        this.animation = animation;
     }
 
     public String getFileFormat() {
         return fileFormat;
     }
 
+    public void setSizePX(String sizePX) {
+        this.sizePX = sizePX;
+    }
+
+    public void setAnimation(boolean animation) {
+        this.animation = animation;
+    }
+
     public void setFileFormat(String fileFormat) {
         this.fileFormat = fileFormat;
     }
-
-
 }

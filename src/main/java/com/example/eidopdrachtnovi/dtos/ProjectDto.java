@@ -8,7 +8,6 @@ public class ProjectDto {
     private String name;
     private String projectManager;
     private String studioMember;
-    public List<String> deelopdrachtNamen = new ArrayList<>();
 
     public ProjectDto() {
     }
@@ -54,11 +53,4 @@ public class ProjectDto {
         this.studioMember = studioMember;
     }
 
-    public List<String> getDeelopdrachtNamen() {
-        return deelopdrachtNamen;
-    }
-
-    public void setDeelopdrachtNamen(List<String> deelopdrachtNamen) {
-        this.deelopdrachtNamen = deelopdrachtNamen;
-    }
 }
