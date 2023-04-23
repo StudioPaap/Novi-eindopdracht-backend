@@ -3,6 +3,7 @@ package com.example.eidopdrachtnovi.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class BrandguideUploadResponse {
@@ -10,6 +11,9 @@ public class BrandguideUploadResponse {
     private String brandguide;
     private String contentType;
     private String uri;
+
+    @OneToOne (mappedBy = "brandguide")
+    private Project project;
 
 
     public BrandguideUploadResponse() {
@@ -22,16 +26,20 @@ public class BrandguideUploadResponse {
         this.uri = uri;
     }
 
-    public String getProjectBrandguide() {
+    public String getBrandguide() {
         return brandguide;
     }
 
-    public String getContentype() {
+    public String getContentType() {
         return contentType;
     }
 
     public String getUri() {
         return uri;
+    }
+
+    public Project getProject() {
+        return project;
     }
 
     public void setProjectBrandguide(String projectBrandguide) {
@@ -44,5 +52,9 @@ public class BrandguideUploadResponse {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

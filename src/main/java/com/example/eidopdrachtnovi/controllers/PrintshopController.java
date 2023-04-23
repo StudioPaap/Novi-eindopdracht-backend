@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Printshop")
+@RequestMapping("/printshop")
 public class PrintshopController {
 
     private final PrintshopService printshopService;
@@ -24,7 +24,7 @@ public class PrintshopController {
     @PostMapping
     public ResponseEntity<PrintshopDto> createPrinter(@RequestBody PrintshopDto pdto){
         Printshop id = printshopService.createPrintshop(pdto);
-        pdto.id = id;
+
         URI uri = URI.create(ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/"+ id).toUriString());
 

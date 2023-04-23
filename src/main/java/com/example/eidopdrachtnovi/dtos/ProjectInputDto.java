@@ -16,6 +16,8 @@ public class ProjectInputDto {
     private String projectManager;
     private String studioMember;
 
+    private String brandguide;
+
 
 
     public String getName() {
@@ -34,6 +36,10 @@ public class ProjectInputDto {
         this.date = date;
     }
 
+    public String getBranduide() {
+        return brandguide;
+    }
+
     public String getProjectManager() {
         return projectManager;
     }
@@ -50,6 +56,8 @@ public class ProjectInputDto {
         this.studioMember = studioMember;
     }
 
-
+    public void setBranduide(String branduide) {
+        this.brandguide = branduide;
+    }
 }
 

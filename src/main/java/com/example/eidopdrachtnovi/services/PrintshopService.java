@@ -30,6 +30,7 @@ public class PrintshopService {
 
         // Mapping
         Printshop printer1 = new Printshop();
+        printer1.setId(dto.getId());
         printer1.setName(dto.getName());
         printer1.setAdress(dto.getAdress());
         printer1.setEmail(dto.getEmail());

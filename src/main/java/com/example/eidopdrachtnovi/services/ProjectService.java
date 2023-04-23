@@ -103,7 +103,7 @@ public class ProjectService {
 //
 //        Optional<Project> optionalProject = projectRepository.findById(ProjectId);
 //
-//        Optional<BrandguideUploadResponse> brandguideUploadResponse = brandguideUploadDownloadRepository.findByBrandguideName(brandguide);
+//        Optional<BrandguideUploadResponse> brandguideUploadResponse = brandguideUploadDownloadRepository.findByByName(brandguide);
 //
 //        if (optionalProject.isPresent() && brandguideUploadResponse.isPresent()) {
 //
