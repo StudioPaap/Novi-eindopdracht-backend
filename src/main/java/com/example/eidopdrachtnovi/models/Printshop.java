@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 
 
 @Entity
-// variabele
+
 public class Printshop {
     @Id
     @GeneratedValue
@@ -19,12 +19,10 @@ public class Printshop {
     private DeelOpdrachtPrint deelOpdrachtPrint;
 
 
-    // constructor
 
     public Printshop(){};
 
 
-    // uitgebreide constructor
 
     public Printshop(String name, String adress, String email, Long phonenumber, DeelOpdrachtPrint deelOpdrachtPrint) {
         this.name = name;

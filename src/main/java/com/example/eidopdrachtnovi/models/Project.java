@@ -19,9 +19,8 @@ public class Project {
     private String projectManager;
     private String studioMember;
 
-    @OneToMany(mappedBy = "project")
-    private List<DeelOpdracht> deelopdrachtenNamen;
-
+    @OneToOne
+    BrandguideUploadResponse brandguide;
 
     // Een default constructor
     public Project() {
@@ -29,23 +28,16 @@ public class Project {
 
     //    // Een constructor met alle gevraagde variable
     public Project(String name, String date, String projectManager,
-                   String studioMember) {
+                   String studioMember, byte[]brandguideFile) {
         this.name = name;
         this.date = date;
         this.projectManager = projectManager;
         this.studioMember = studioMember;
+
     }
 
 // getters en setters
 
-
-    public String getStudioMember() {
-        return studioMember;
-    }
-
-    public void setStudioMember(String studioMember) {
-        this.studioMember = studioMember;
-    }
 
     public Long getId() {
         return id;
@@ -55,35 +47,43 @@ public class Project {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getProjectManager() {
         return projectManager;
     }
 
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
+    public String getStudioMember() {
+        return studioMember;
+    }
+
+    public BrandguideUploadResponse getBrandguide() {
+        return brandguide;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public List<DeelOpdracht> getDeelopdrachtenNamen() {
-        return deelopdrachtenNamen;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDeelopdrachtenNamen(List<DeelOpdracht> deelopdrachtenNamen) {
-        this.deelopdrachtenNamen = deelopdrachtenNamen;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setProjectManager(String projectManager) {
+        this.projectManager = projectManager;
+    }
+
+    public void setStudioMember(String studioMember) {
+        this.studioMember = studioMember;
+    }
+
+    public void setBrandguide(BrandguideUploadResponse brandguide) {
+        this.brandguide = brandguide;
     }
 }

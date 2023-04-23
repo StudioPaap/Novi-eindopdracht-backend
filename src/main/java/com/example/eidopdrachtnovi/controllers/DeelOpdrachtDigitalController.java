@@ -2,6 +2,8 @@ package com.example.eidopdrachtnovi.controllers;
 
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDigitalDto;
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDigitalInputDto;
+import com.example.eidopdrachtnovi.models.DeelOpdrachtDigital;
+import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.services.DeelOpdrachtDigitalService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,12 @@ import java.util.List;
 
         }
 
+    @GetMapping("/{status}")
+    public ResponseEntity<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByStatus(@PathVariable("status") Status status) {
+        DeelOpdrachtDigitalDto deelOpdrachtDigital = (DeelOpdrachtDigitalDto) deelOpdrachtDigitalService.getDeelOpdrachtDigitalByStatus(status);
+        return ResponseEntity.ok().body(deelOpdrachtDigital);
+    }
+
 
         @PostMapping()
         public ResponseEntity<DeelOpdrachtDigitalDto> addDeelOpdrachtDigital(@Valid @RequestBody DeelOpdrachtDigitalInputDto deelOpdrachtDigitalInputDto) {
@@ -64,13 +72,21 @@ import java.util.List;
         }
 
 
-        @PutMapping("{id}")
+        @PutMapping("/{id}")
         public ResponseEntity<DeelOpdrachtDigitalDto> updateDeelOpdrachtDigital(@PathVariable Long id, @Valid @RequestBody DeelOpdrachtDigitalInputDto newDeelOpdrachtDigital) {
             DeelOpdrachtDigitalDto dto = deelOpdrachtDigitalService.updateDeelOpdrachtDigital(id, newDeelOpdrachtDigital);
 
             return ResponseEntity.ok().body(dto);
         }
 
+    @PutMapping("/{id}/status")
+    public ResponseEntity<DeelOpdrachtDigitalDto> updateDeelOpdrachtDigitalStatus(@PathVariable Long id, @Valid @RequestBody DeelOpdrachtDigitalInputDto newDeelOpdrachtDigital) {
+        DeelOpdrachtDigitalDto dto = deelOpdrachtDigitalService.updateDeelOpdrachtDigitalStatus(id, newDeelOpdrachtDigital);
+
+        return ResponseEntity.ok().body(dto);
     }
+
+
+}
 
 

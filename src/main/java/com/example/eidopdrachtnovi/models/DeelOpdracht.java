@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public abstract class DeelOpdracht {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue (strategy = GenerationType.IDENTITY)
   Long id;
 
   //  variable declaraties
@@ -21,7 +21,8 @@ public abstract class DeelOpdracht {
   private String deadlineSecVersion;
   private String deadlineDef;
   private String feedback;
-  public Status status;
+  @Column(name = "status_code")
+  private Status status;
 
 
   @ManyToOne

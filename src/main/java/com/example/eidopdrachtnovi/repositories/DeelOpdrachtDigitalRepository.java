@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DeelOpdrachtDigitalRepository extends JpaRepository<DeelOpdrachtDigital, Long> {
 
-    List<DeelOpdrachtDigital> getAllDeelOpdrachtByStatus(Status status);
+    List<DeelOpdrachtDigital> getDeelOpdrachtDigitalByStatus(Status status);
 
 }
 

@@ -15,7 +15,8 @@ public class ProjectInputDto {
     private String date;
     private String projectManager;
     private String studioMember;
-    public List<String> deelopdrachtenNamen = new ArrayList<>();
+
+
 
     public String getName() {
         return name;
@@ -49,12 +50,6 @@ public class ProjectInputDto {
         this.studioMember = studioMember;
     }
 
-    public List<String> getDeelopdrachtenNamen() {
-        return deelopdrachtenNamen;
-    }
 
-    public void setDeelopdrachtenNamen(List<String> deelopdrachtenNamen) {
-        this.deelopdrachtenNamen = deelopdrachtenNamen;
-    }
 }
 

@@ -7,6 +7,7 @@ import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.repositories.DeelOpdrachtDigitalRepository;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -38,15 +39,16 @@ public class DeelOpdrachtDigitalService {
         return dodDtoList;
     }
 
-    public List<DeelOpdrachtDigitalDto> getAllDeelOpdrachtDigitalByStatus(Status status) {
-        List<DeelOpdrachtDigital> dodList = deelOpdrachtDigitalRepository.getAllDeelOpdrachtByStatus(status);
-        List<DeelOpdrachtDigitalDto> dodDtoList = new ArrayList<>();
+    public List<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByStatus(Status status) {
+        List<DeelOpdrachtDigital> dodsList = deelOpdrachtDigitalRepository.getDeelOpdrachtDigitalByStatus(status);
+        List<DeelOpdrachtDigitalDto> dodsDtoList = new ArrayList<>();
 
-        for (DeelOpdrachtDigital dod : dodList) {
+        for (DeelOpdrachtDigital dod : dodsList) {
             DeelOpdrachtDigitalDto dto = transferToDto(dod);
-            dodDtoList.add(dto);
+            BeanUtils.copyProperties(dod, dto);
+            dodsDtoList.add(dto);
         }
-        return dodDtoList;
+        return dodsDtoList;
     }
 
     public DeelOpdrachtDigitalDto getDeelOpdrachtDigitalById(Long id) {
@@ -76,10 +78,28 @@ public class DeelOpdrachtDigitalService {
 
     }
 
+    public DeelOpdrachtDigitalDto updateDeelOpdrachtDigitalStatus(Long id, DeelOpdrachtDigitalInputDto newDeelopdrachtDigital) {
+        Optional<DeelOpdrachtDigital> DeelOpdrachtDigitalOptional = deelOpdrachtDigitalRepository.findById(id);
+        if (DeelOpdrachtDigitalOptional.isPresent()) {
+            DeelOpdrachtDigital deelOpdrachtDigital1 = DeelOpdrachtDigitalOptional.get();
+            deelOpdrachtDigital1.setStatus(newDeelopdrachtDigital.getStatus());
+
+            DeelOpdrachtDigital returnDeelopdrachtDigital = deelOpdrachtDigitalRepository.save(deelOpdrachtDigital1);
+            return transferToDto(returnDeelopdrachtDigital);
+        }
+          else {
+
+            throw new RecordNotFoundException("geen Deelopdracht gevonden");
+
+        }
+    }
+
+
     public DeelOpdrachtDigitalDto updateDeelOpdrachtDigital(Long id, DeelOpdrachtDigitalInputDto newDeelopdrachtDigital) {
 
         Optional<DeelOpdrachtDigital> DeelOpdrachtDigitalOptional = deelOpdrachtDigitalRepository.findById(id);
         if (DeelOpdrachtDigitalOptional.isPresent()) {
+
 
             DeelOpdrachtDigital deelOpdrachtDigital1 = DeelOpdrachtDigitalOptional.get();
 
@@ -90,11 +110,10 @@ public class DeelOpdrachtDigitalService {
             deelOpdrachtDigital1.setDeadlineSecVersion(newDeelopdrachtDigital.getDeadlineSecVersion());
             deelOpdrachtDigital1.setDeadlineDef(newDeelopdrachtDigital.getDeadlineDef());
             deelOpdrachtDigital1.setFeedback(newDeelopdrachtDigital.getFeedback());
+            deelOpdrachtDigital1.setStatus(newDeelopdrachtDigital.getStatus());
             deelOpdrachtDigital1.setSizePX(newDeelopdrachtDigital.getSizePX());
             deelOpdrachtDigital1.setAnimation(newDeelopdrachtDigital.isAnimation());
             deelOpdrachtDigital1.setFileFormat(newDeelopdrachtDigital.getFileFormat());
-
-            ;
 
             DeelOpdrachtDigital returnDeelopdrachtDigital = deelOpdrachtDigitalRepository.save(deelOpdrachtDigital1);
 
@@ -122,6 +141,7 @@ public class DeelOpdrachtDigitalService {
         deelOpdrachtDigital.setAnimation(dto.isAnimation());
         Project project = projectRepository.findById(dto.projectId).get();
         deelOpdrachtDigital.setProject(project);
+        deelOpdrachtDigital.setStatus(dto.getStatus());
 
 
         return deelOpdrachtDigital;
@@ -130,7 +150,7 @@ public class DeelOpdrachtDigitalService {
 
     public DeelOpdrachtDigitalDto transferToDto(DeelOpdrachtDigital deelOpdrachtDigital) {
         DeelOpdrachtDigitalDto dto = new DeelOpdrachtDigitalDto();
-
+        dto.setId(deelOpdrachtDigital.getId());
         dto.setName(deelOpdrachtDigital.getName());
         dto.setKopij(deelOpdrachtDigital.getKopij());
         dto.setDeadlineFirstVersion(deelOpdrachtDigital.getDeadlineFirstVersion());
@@ -140,6 +160,8 @@ public class DeelOpdrachtDigitalService {
         dto.setSizePX(deelOpdrachtDigital.getSizePX());
         dto.setFileFormat(deelOpdrachtDigital.getFileFormat());
         dto.setAnimation(deelOpdrachtDigital.isAnimation());
+        dto.setProjectId(deelOpdrachtDigital.getProject().getId());
+
 
 
         return dto;
