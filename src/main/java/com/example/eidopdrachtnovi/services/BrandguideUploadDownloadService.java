@@ -41,7 +41,7 @@ public class BrandguideUploadDownloadService {
 
         String brandguide = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-        Path filePath = Paths.get(fileStoragePath + "\\" + brandguide);
+        Path filePath = Paths.get(fileStoragePath + "/" + brandguide);
 
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);

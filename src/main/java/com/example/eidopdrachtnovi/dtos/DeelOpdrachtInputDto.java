@@ -60,9 +60,7 @@ public class DeelOpdrachtInputDto {
         return feedback;
     }
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
+
 
     public Status getStatus() {
         return status;

@@ -63,10 +63,21 @@ public class ProjectController {
 
     }
 
+//    @PostMapping("/{id}/brandguide")
+//
+//    public void assignBrandguideToProject(@PathVariable("id") Long projectId,
+//                                          @RequestBody MultipartFile file) {
+//
+//        BrandguideUploadResponse brandguideUploadResponse = controller.singleFileUpload(file);
+//
+//        projectService.assignBrandguideToProject(brandguideUploadResponse.getBrandguide(), projectId);
+//
+//    }
 
 
 
-    @DeleteMapping("/projects/{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProject(@PathVariable Long id) {
 
         // Hier gebruiken we weer een service methode in plaats van direct de repository aan te spreken.
@@ -84,14 +95,6 @@ public class ProjectController {
         return ResponseEntity.ok().body(dto);
     }
 
-//    @PostMapping("/{id}/brandguide")
-//    public void assignBrandguideToProject(@PathVariable("id") Long projectId,
-//                                     @RequestBody MultipartFile file) {
-//
-//        BrandguideUploadResponse brandguideUploadResponse = controller.singleFileUpload(file);
-//
-//        projectService.assignBrandguideToProject(brandguideUploadResponse.getProjectBrandguide(), projectId);
-//
-//    }
+
 
 }

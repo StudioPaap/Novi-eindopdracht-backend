@@ -1,5 +1,7 @@
 package com.example.eidopdrachtnovi.dtos;
 
+import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ public class ProjectDto {
     private String name;
     private String projectManager;
     private String studioMember;
+    private BrandguideUploadResponse brandguide;
 
     public ProjectDto() {
     }
@@ -19,6 +22,10 @@ public class ProjectDto {
         this.studioMember = studioMember;
 
 
+    }
+
+    public ProjectDto(BrandguideUploadResponse brandguide){
+        this.brandguide = brandguide;
     }
 
     public Long getId() {

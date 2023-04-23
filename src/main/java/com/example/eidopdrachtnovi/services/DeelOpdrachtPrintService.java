@@ -140,6 +140,7 @@ public class DeelOpdrachtPrintService {
         dto.setDeadlineSecVersion(deelOpdrachtPrint.getDeadlineSecVersion());
         dto.setDeadlineDef(deelOpdrachtPrint.getDeadlineDef());
         dto.setFeedback(deelOpdrachtPrint.getFeedback());
+        dto.setStatus((deelOpdrachtPrint.getStatus()));
         dto.setSizeWidthMM(deelOpdrachtPrint.getSizeWidthMM());
         dto.setSizeLengthMM(deelOpdrachtPrint.getSizeLengthMM());
         dto.setBleed(deelOpdrachtPrint.getBleed());

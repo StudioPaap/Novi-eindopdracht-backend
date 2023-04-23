@@ -6,14 +6,15 @@ import jakarta.validation.constraints.Email;
 
 public class PrintshopDto {
 
-    public Printshop id;
+    public Long id;
     public String name;
     public String adress;
     public String email;
     public Long phonenumber;
     public DeelOpdrachtPrint deelOpdrachtPrint;
 
-    public Printshop getId() {
+
+    public Long getId() {
         return id;
     }
 
