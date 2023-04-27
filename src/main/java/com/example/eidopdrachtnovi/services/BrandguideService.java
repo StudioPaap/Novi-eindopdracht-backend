@@ -1,8 +1,8 @@
 package com.example.eidopdrachtnovi.services;
 
 
-import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
-import com.example.eidopdrachtnovi.repositories.BrandguideUploadDownloadRepository;
+import com.example.eidopdrachtnovi.models.Brandguide;
+import com.example.eidopdrachtnovi.repositories.BrandguideRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -19,15 +19,15 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 @Service
-public class BrandguideUploadDownloadService {
+public class BrandguideService {
     private final Path fileStoragePath;
     private final String fileStorageLocation;
-    private final BrandguideUploadDownloadRepository repo;
+    private final BrandguideRepository brandguideRepository;
 
-    public BrandguideUploadDownloadService(@Value("upload") String fileStorageLocation, BrandguideUploadDownloadRepository repo) {
+    public BrandguideService(@Value("upload") String fileStorageLocation, BrandguideRepository brandguideRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
         this.fileStorageLocation = fileStorageLocation;
-        this.repo = repo;
+        this.brandguideRepository = brandguideRepository;
 
         try {
             Files.createDirectories(fileStoragePath);
@@ -49,7 +49,7 @@ public class BrandguideUploadDownloadService {
             throw new RuntimeException("Issue in storing the file", e);
         }
 
-        repo.save(new BrandguideUploadResponse(brandguide, file.getContentType(), uri));
+        brandguideRepository.save(new Brandguide(brandguide, file.getContentType(), uri));
 
         return brandguide;
     }

@@ -39,8 +39,20 @@ public class DeelOpdrachtDigitalService {
         return dodDtoList;
     }
 
+    public List<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByName(String name) {
+        List<DeelOpdrachtDigital> dodnList = deelOpdrachtDigitalRepository.findDeelOpdrachtDigitalByName(name);
+        List<DeelOpdrachtDigitalDto> dodnDtoList = new ArrayList<>();
+
+        for (DeelOpdrachtDigital dodn : dodnList) {
+            DeelOpdrachtDigitalDto dto = transferToDto(dodn);
+            BeanUtils.copyProperties(dodn, dto);
+            dodnDtoList.add(dto);
+        }
+        return dodnDtoList;
+    }
+
     public List<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByStatus(Status status) {
-        List<DeelOpdrachtDigital> dodsList = deelOpdrachtDigitalRepository.getDeelOpdrachtDigitalByStatus(status);
+        List<DeelOpdrachtDigital> dodsList = deelOpdrachtDigitalRepository.findDeelOpdrachtDigitalByStatus(status);
         List<DeelOpdrachtDigitalDto> dodsDtoList = new ArrayList<>();
 
         for (DeelOpdrachtDigital dod : dodsList) {
@@ -49,6 +61,21 @@ public class DeelOpdrachtDigitalService {
             dodsDtoList.add(dto);
         }
         return dodsDtoList;
+    }
+
+
+    public List<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByProject(Long projectId) {
+
+        Optional<Project> project = projectRepository.findById(projectId);
+        List<DeelOpdrachtDigital> dodnList = deelOpdrachtDigitalRepository.findDeelOpdrachtDigitalByProject(project);
+        List<DeelOpdrachtDigitalDto> dodnDtoList = new ArrayList<>();
+
+        for (DeelOpdrachtDigital dodn : dodnList) {
+            DeelOpdrachtDigitalDto dto = transferToDto(dodn);
+            BeanUtils.copyProperties(dodn, dto);
+            dodnDtoList.add(dto);
+        }
+        return dodnDtoList;
     }
 
     public DeelOpdrachtDigitalDto getDeelOpdrachtDigitalById(Long id) {
@@ -129,7 +156,7 @@ public class DeelOpdrachtDigitalService {
 
     public DeelOpdrachtDigital transferToDeelopdrachtDigital(DeelOpdrachtDigitalInputDto dto) {
         var deelOpdrachtDigital = new DeelOpdrachtDigital();
-
+        deelOpdrachtDigital.setId(dto.getId());
         deelOpdrachtDigital.setName(dto.getName());
         deelOpdrachtDigital.setKopij(dto.getKopij());
         deelOpdrachtDigital.setDeadlineFirstVersion(dto.getDeadlineFirstVersion());
@@ -161,6 +188,7 @@ public class DeelOpdrachtDigitalService {
         dto.setFileFormat(deelOpdrachtDigital.getFileFormat());
         dto.setAnimation(deelOpdrachtDigital.isAnimation());
         dto.setProjectId(deelOpdrachtDigital.getProject().getId());
+        dto.setStatus(deelOpdrachtDigital.getStatus());
 
 
 

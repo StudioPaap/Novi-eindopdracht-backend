@@ -16,7 +16,7 @@ public class ProjectInputDto {
     private String projectManager;
     private String studioMember;
 
-    private String brandguide;
+    private Long BrandguideId;
 
 
 
@@ -36,8 +36,8 @@ public class ProjectInputDto {
         this.date = date;
     }
 
-    public String getBranduide() {
-        return brandguide;
+    public Long getBrandguideId() {
+        return BrandguideId;
     }
 
     public String getProjectManager() {
@@ -56,8 +56,8 @@ public class ProjectInputDto {
         this.studioMember = studioMember;
     }
 
-    public void setBranduide(String branduide) {
-        this.brandguide = branduide;
+    public void setBrandguideID(Long brandguideId) {
+        BrandguideId = brandguideId;
     }
 }
 

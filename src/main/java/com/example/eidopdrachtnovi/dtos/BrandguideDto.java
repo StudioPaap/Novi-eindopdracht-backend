@@ -1,29 +1,21 @@
-package com.example.eidopdrachtnovi.models;
+package com.example.eidopdrachtnovi.dtos;
 
+import com.example.eidopdrachtnovi.models.Project;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-
-@Entity
-public class BrandguideUploadResponse {
-    @Id
+public class BrandguideDto {
     private String brandguide;
     private String contentType;
     private String uri;
-
-    @OneToOne (mappedBy = "brandguide")
     private Project project;
 
-
-    public BrandguideUploadResponse() {
-
+    public BrandguideDto() {
     }
 
-    public BrandguideUploadResponse(String brandguide, String contentType, String uri) {
+    public BrandguideDto(String brandguide, String contentType, String uri, Project project) {
         this.brandguide = brandguide;
         this.contentType = contentType;
         this.uri = uri;
+        this.project = project;
     }
 
     public String getBrandguide() {
@@ -42,12 +34,12 @@ public class BrandguideUploadResponse {
         return project;
     }
 
-    public void setProjectBrandguide(String projectBrandguide) {
-        brandguide = projectBrandguide;
+    public void setBrandguide(String brandguide) {
+        this.brandguide = brandguide;
     }
 
-    public void setContentype(String contentype) {
-        this.contentType = contentype;
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     public void setUri(String uri) {

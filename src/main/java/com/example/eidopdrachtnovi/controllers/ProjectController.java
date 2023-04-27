@@ -2,7 +2,7 @@ package com.example.eidopdrachtnovi.controllers;
 
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
-import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
+import com.example.eidopdrachtnovi.models.Brandguide;
 import com.example.eidopdrachtnovi.services.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ import java.util.Optional;
 public class ProjectController {
 
     private final ProjectService projectService;
-    private final BrandguideUploadDownloadController controller;
+    private final BrandguideController brandguideController;
 
 
-    public ProjectController(ProjectService projectService, BrandguideUploadDownloadController controller) {
+    public ProjectController(ProjectService projectService, BrandguideController brandguideController) {
         this.projectService = projectService;
-        this.controller = controller;
+        this.brandguideController = brandguideController;
     }
 
 
@@ -66,11 +66,11 @@ public class ProjectController {
 //    @PostMapping("/{id}/brandguide")
 //
 //    public void assignBrandguideToProject(@PathVariable("id") Long projectId,
-//                                          @RequestBody MultipartFile file) {
+//                                          @PathVariable("file")MultipartFile file) {
 //
-//        BrandguideUploadResponse brandguideUploadResponse = controller.singleFileUpload(file);
+//        Brandguide brandguide = brandguideController.singleFileUpload(file);
 //
-//        projectService.assignBrandguideToProject(brandguideUploadResponse.getBrandguide(), projectId);
+//        projectService.assignBrandguideToProject(brandguide.getBrandguide(), projectId);
 //
 //    }
 
@@ -80,7 +80,6 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProject(@PathVariable Long id) {
 
-        // Hier gebruiken we weer een service methode in plaats van direct de repository aan te spreken.
         ProjectService.deleteProject(id);
 
         return ResponseEntity.noContent().build();

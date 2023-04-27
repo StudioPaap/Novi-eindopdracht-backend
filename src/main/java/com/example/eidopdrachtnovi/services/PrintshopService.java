@@ -1,100 +1,116 @@
 package com.example.eidopdrachtnovi.services;
 
 import com.example.eidopdrachtnovi.dtos.PrintshopDto;
-import com.example.eidopdrachtnovi.dtos.ProjectDto;
+
+import com.example.eidopdrachtnovi.dtos.PrintshopInputDto;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
 import com.example.eidopdrachtnovi.models.Printshop;
-import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.repositories.PrintshopRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class PrintshopService {
 
-    private final PrintshopRepository printshopRepository;
 
-    public PrintshopService(PrintshopRepository printshopRepository) {
-        this.printshopRepository = printshopRepository;
-    }
 
-    public Printshop createPrintshop(PrintshopDto dto) {
+    @Service
+    public class PrintshopService {
 
-        // Check of de dto-waarden niet null zijn voordat ze worden gebruikt
-        if(dto.getName() == null || dto.getAdress() == null || dto.getEmail() == null || dto.getPhonenumber() == null) {
-            throw new IllegalArgumentException("Niet alle velden zijn ingevuld");
+        private final PrintshopRepository printshopRepository;
+
+
+
+        public PrintshopService(PrintshopRepository printshopRepository) {
+            this.printshopRepository = printshopRepository;
         }
 
-        // Mapping
-        Printshop printer1 = new Printshop();
-        printer1.setId(dto.getId());
-        printer1.setName(dto.getName());
-        printer1.setAdress(dto.getAdress());
-        printer1.setEmail(dto.getEmail());
-        printer1.setPhonenumber(dto.getPhonenumber());
-        printer1.setDeelOpdrachtPrint(dto.getDeelOpdrachtPrint());
-        printshopRepository.save(printer1);
 
-        return printer1;
-    }
+        public List<PrintshopDto> getAllprintshops() {
+            List<Printshop> dopList = printshopRepository.findAll();
+            List<PrintshopDto> dopDtoList = new ArrayList<>();
 
-    public Printshop getPrintshopById(Long id) {
-        Optional<Printshop> printshopOptional = printshopRepository.findById(id);
-        if (printshopOptional.isPresent()) {
-            Printshop ps = printshopOptional.get();
-            return ps;
-        } else {
-            throw new RecordNotFoundException("geen Printshop gevonden");
-        }
-    }
-
-    public List<PrintshopDto> getAllPrintshops() {
-        List<Printshop> printshops = printshopRepository.findAll();
-        List<PrintshopDto> printshopDtos = new ArrayList<>();
-
-        for (Printshop printshop : printshops) {
-            PrintshopDto printshopDto = new PrintshopDto();
-            printshopDto.setName(printshop.getName());
-            printshopDto.setAdress(printshop.getAdress());
-            printshopDto.setEmail(printshop.getEmail());
-            printshopDto.setPhonenumber(printshop.getPhonenumber());
-            printshopDto.setDeelOpdrachtPrint(printshop.getDeelOpdrachtPrint());
-            printshopDtos.add(printshopDto);
+            for (Printshop dop : dopList) {
+                PrintshopDto dto = transferToDto(dop);
+                dopDtoList.add(dto);
+            }
+            return dopDtoList;
         }
 
-        return printshopDtos;
-    }
 
-    public Printshop changePrintshop(Long id, PrintshopDto dto) {
-        Optional<Printshop> optionalPrintshop = printshopRepository.findById(id);
-
-        if (!optionalPrintshop.isPresent()) {
-            throw new RecordNotFoundException("Printshop with id " + id + " not found.");
+        public PrintshopDto getPrintshopById(Long id) {
+            Optional<Printshop> printshopOptional = printshopRepository.findById(id);
+            if (printshopOptional.isPresent()) {
+                Printshop dop = printshopOptional.get();
+                return transferToDto(dop);
+            } else {
+                throw new RecordNotFoundException("geen printshop gevonden");
+            }
         }
 
-        Printshop printshop = optionalPrintshop.get();
-        printshop.setName(dto.getName());
-        printshop.setAdress(dto.getAdress());
-        printshop.setEmail(dto.getEmail());
-        printshop.setPhonenumber(dto.getPhonenumber());
-        printshop.setDeelOpdrachtPrint(dto.getDeelOpdrachtPrint());
 
-        return printshopRepository.save(printshop);
-    }
+        public PrintshopDto addPrintshop(PrintshopInputDto dto) {
 
-    public void deletePrintshop(Long id) {
-        Optional<Printshop> optionalPrintshop = printshopRepository.findById(id);
+            Printshop dop = transferToDeelopdrachtPrint(dto);
+            printshopRepository.save(dop);
 
-        if (!optionalPrintshop.isPresent()) {
-            throw new RecordNotFoundException("Printshop with id " + id + " not found.");
+            return transferToDto(dop);
         }
 
-        printshopRepository.delete(optionalPrintshop.get());
-    }
+        public void deletePrintshop(@RequestBody Long id) {
 
-    }
+            printshopRepository.deleteById(id);
 
+        }
+
+        public PrintshopDto updatePrintshop(Long id, PrintshopInputDto newPrinsthop) {
+
+            Optional<Printshop> PrintshopOptional = printshopRepository.findById(id);
+            if (PrintshopOptional.isPresent()) {
+
+                Printshop printshop1 = PrintshopOptional.get();
+                printshop1.setName(newPrinsthop.getName());
+                printshop1.setAdress(newPrinsthop.getAdress());
+                printshop1.setEmail(newPrinsthop.getEmail());
+                printshop1.setPhonenumber(newPrinsthop.getPhonenumber());
+
+
+
+                Printshop returnPrintshop = printshopRepository.save(printshop1);
+
+                return transferToDto(returnPrintshop);
+
+            } else {
+
+                throw new RecordNotFoundException("geen Printshop gevonden");
+
+            }
+
+        }
+
+        // Dit is de vertaal methode van PrintshopInputDto naar Printshop.
+        public Printshop transferToDeelopdrachtPrint(PrintshopInputDto dto) {
+            var printshop = new Printshop();
+
+            printshop.setName(dto.getName());
+           printshop.setAdress(dto.getAdress());
+           printshop.setEmail(dto.getEmail());
+           printshop.setPhonenumber(dto.getPhonenumber());
+
+            return printshop;
+        }
+
+        // Dit is de vertaal methode van Printshop naar PrintshopDto
+        public PrintshopDto transferToDto(Printshop printshop) {
+            PrintshopDto dto = new PrintshopDto();
+            dto.setId(printshop.getId());
+            dto.setName(printshop.getName());
+            dto.setAdress(printshop.getAdress());
+            dto.setEmail(printshop.getEmail());
+            dto.setPhonenumber(printshop.getPhonenumber());
+            return dto;
+        }
+    }
 

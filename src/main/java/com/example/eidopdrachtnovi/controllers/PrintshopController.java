@@ -1,61 +1,79 @@
-
 package com.example.eidopdrachtnovi.controllers;
 
 import com.example.eidopdrachtnovi.dtos.PrintshopDto;
-import com.example.eidopdrachtnovi.models.Printshop;
+import com.example.eidopdrachtnovi.dtos.PrintshopInputDto;
 import com.example.eidopdrachtnovi.services.PrintshopService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/printshop")
 public class PrintshopController {
 
+
     private final PrintshopService printshopService;
+
+
 
     public PrintshopController(PrintshopService printshopService) {
         this.printshopService = printshopService;
     }
 
-    @PostMapping
-    public ResponseEntity<PrintshopDto> createPrinter(@RequestBody PrintshopDto pdto){
-        Printshop id = printshopService.createPrintshop(pdto);
+    @GetMapping()
+    public ResponseEntity<List<PrintshopDto>>  getAllprintshops() {
 
-        URI uri = URI.create(ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/"+ id).toUriString());
+        List<PrintshopDto> dtos;
 
-        return ResponseEntity.created(uri).body(pdto);
+        dtos = printshopService. getAllprintshops();
 
+        return ResponseEntity.ok().body(dtos);
     }
+
 
     @GetMapping("/{id}")
-    public ResponseEntity<Printshop> getPrintshopById(@PathVariable("id") Long id) {
+    public ResponseEntity<PrintshopDto> getPrintshopById(@PathVariable("id")Long id) {
 
-        Printshop printshop = printshopService.getPrintshopById(id);
+        PrintshopDto printshop = printshopService.getPrintshopById(id);
 
         return ResponseEntity.ok().body(printshop);
 
     }
-    @GetMapping()
-    public ResponseEntity<List<PrintshopDto>> getAllPrintshops() {
-        List<PrintshopDto> printshops = printshopService.getAllPrintshops();
 
-        return ResponseEntity.ok().body(printshops);
+
+    @PostMapping()
+    public ResponseEntity<PrintshopDto> addPrintshop(@Valid @RequestBody PrintshopInputDto printshopInputDto) {
+
+        PrintshopDto dto = printshopService.addPrintshop(printshopInputDto);
+
+        return ResponseEntity.created(null).body(dto);
+
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Printshop> changePrintshop(@PathVariable Long id, @RequestBody PrintshopDto dto) {
-        Printshop printshop = printshopService.changePrintshop(id, dto);
-        return ResponseEntity.ok().body(printshop);
-    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePrintshop(@PathVariable Long id) {
+    public ResponseEntity<Object> deletePrintshop(@PathVariable Long id) {
+
         printshopService.deletePrintshop(id);
+
         return ResponseEntity.noContent().build();
+
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PrintshopDto> updatePrintshop(@PathVariable Long id, @Valid @RequestBody PrintshopInputDto newPrintshop) {
+        PrintshopDto dto = printshopService.updatePrintshop(id, newPrintshop);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+
+
+
 }
+
+

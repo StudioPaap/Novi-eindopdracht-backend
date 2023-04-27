@@ -45,9 +45,25 @@ import java.util.List;
 
         }
 
-    @GetMapping("/{status}")
-    public ResponseEntity<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByStatus(@PathVariable("status") Status status) {
-        DeelOpdrachtDigitalDto deelOpdrachtDigital = (DeelOpdrachtDigitalDto) deelOpdrachtDigitalService.getDeelOpdrachtDigitalByStatus(status);
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<DeelOpdrachtDigitalDto>> getDeelOpdrachtDigitalByStatus(@PathVariable("status") Status status) {
+        List<DeelOpdrachtDigitalDto> dtos;
+
+            dtos =  deelOpdrachtDigitalService.getDeelOpdrachtDigitalByStatus(status);
+        return ResponseEntity.ok().body(dtos);
+    }
+
+    @GetMapping("/project/{projectId}")
+    public ResponseEntity<List<DeelOpdrachtDigitalDto>> getDeelOpdrachtDigitalByProject(@PathVariable("projectId")Long projectId) {
+        List<DeelOpdrachtDigitalDto> dtos;
+
+        dtos = deelOpdrachtDigitalService.getDeelOpdrachtDigitalByProject(projectId);
+        return ResponseEntity.ok().body(dtos);
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByName(@PathVariable("name") String name) {
+        DeelOpdrachtDigitalDto deelOpdrachtDigital = (DeelOpdrachtDigitalDto) deelOpdrachtDigitalService.getDeelOpdrachtDigitalByName(name);
         return ResponseEntity.ok().body(deelOpdrachtDigital);
     }
 

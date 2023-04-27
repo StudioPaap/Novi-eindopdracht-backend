@@ -3,8 +3,6 @@ package com.example.eidopdrachtnovi.models;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name="Projects")
 public class Project {
@@ -20,7 +18,7 @@ public class Project {
     private String studioMember;
 
     @OneToOne
-    BrandguideUploadResponse brandguide;
+    Brandguide brandguide;
 
     // Een default constructor
     public Project() {
@@ -59,7 +57,7 @@ public class Project {
         return studioMember;
     }
 
-    public BrandguideUploadResponse getBrandguide() {
+    public Brandguide getBrandguide() {
         return brandguide;
     }
 
@@ -83,7 +81,7 @@ public class Project {
         this.studioMember = studioMember;
     }
 
-    public void setBrandguide(BrandguideUploadResponse brandguide) {
+    public void setBrandguide(Brandguide brandguide) {
         this.brandguide = brandguide;
     }
 }

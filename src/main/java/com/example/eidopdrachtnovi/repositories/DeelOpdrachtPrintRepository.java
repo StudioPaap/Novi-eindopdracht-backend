@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface DeelOpdrachtPrintRepository extends JpaRepository<DeelOpdrachtPrint, Long> {
 
-    List<DeelOpdrachtPrint> getAllDeelOpdrachtByStatus(Status status);
+//    List<DeelOpdrachtPrint> getAllDeelOpdrachtByStatus(DeelOpdrachtPrint Long);
 }
 
