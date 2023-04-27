@@ -6,6 +6,7 @@ import com.example.eidopdrachtnovi.models.*;
 import com.example.eidopdrachtnovi.repositories.DeelOpdrachtPrintRepository;
 import com.example.eidopdrachtnovi.repositories.PrintshopRepository;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,16 +41,6 @@ public class DeelOpdrachtPrintService {
         return dopDtoList;
     }
 
-//    public List<DeelOpdrachtPrintDto> getAllDeelOpdrachtPrintByStatus(Status status) {
-//        List<DeelOpdrachtPrint> dopList = deelOpdrachtPrintRepository.getAllDeelOpdrachtByStatus(status);
-//        List<DeelOpdrachtPrintDto> dopDtoList = new ArrayList<>();
-//
-//        for (DeelOpdrachtPrint dop : dopList) {
-//            DeelOpdrachtPrintDto dto = transferToDto(dop);
-//            dopDtoList.add(dto);
-//        }
-//        return dopDtoList;
-//    }
 
     public DeelOpdrachtPrintDto getDeelOpdrachtPrintById(Long id) {
         Optional<DeelOpdrachtPrint> deelOpdrachtPrintOptional = deelOpdrachtPrintRepository.findById(id);
@@ -61,6 +52,32 @@ public class DeelOpdrachtPrintService {
         }
     }
 
+    public List<DeelOpdrachtPrintDto> getDeelOpdrachtPrintByStatus(Status status) {
+        List<DeelOpdrachtPrint> dopsList = deelOpdrachtPrintRepository.findDeelOpdrachtPrintByStatus(status);
+        List<DeelOpdrachtPrintDto> dopsDtoList = new ArrayList<>();
+
+        for (DeelOpdrachtPrint dop : dopsList) {
+            DeelOpdrachtPrintDto dto = transferToDto(dop);
+            BeanUtils.copyProperties(dop, dto);
+            dopsDtoList.add(dto);
+        }
+        return dopsDtoList;
+    }
+
+
+    public List<DeelOpdrachtPrintDto> getDeelOpdrachtPrintByProject(Long projectId) {
+
+        Optional<Project> project = projectRepository.findById(projectId);
+        List<DeelOpdrachtPrint> doppList = deelOpdrachtPrintRepository.findDeelOpdrachtPrintByProject(project);
+        List<DeelOpdrachtPrintDto> doppDtoList = new ArrayList<>();
+
+        for (DeelOpdrachtPrint dops : doppList) {
+            DeelOpdrachtPrintDto dto = transferToDto(dops);
+            BeanUtils.copyProperties(dops, dto);
+            doppDtoList.add(dto);
+        }
+        return doppDtoList;
+    }
 
 
 

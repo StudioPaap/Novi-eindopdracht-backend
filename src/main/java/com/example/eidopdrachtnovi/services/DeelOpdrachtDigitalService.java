@@ -39,17 +39,6 @@ public class DeelOpdrachtDigitalService {
         return dodDtoList;
     }
 
-    public List<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByName(String name) {
-        List<DeelOpdrachtDigital> dodnList = deelOpdrachtDigitalRepository.findDeelOpdrachtDigitalByName(name);
-        List<DeelOpdrachtDigitalDto> dodnDtoList = new ArrayList<>();
-
-        for (DeelOpdrachtDigital dodn : dodnList) {
-            DeelOpdrachtDigitalDto dto = transferToDto(dodn);
-            BeanUtils.copyProperties(dodn, dto);
-            dodnDtoList.add(dto);
-        }
-        return dodnDtoList;
-    }
 
     public List<DeelOpdrachtDigitalDto> getDeelOpdrachtDigitalByStatus(Status status) {
         List<DeelOpdrachtDigital> dodsList = deelOpdrachtDigitalRepository.findDeelOpdrachtDigitalByStatus(status);
