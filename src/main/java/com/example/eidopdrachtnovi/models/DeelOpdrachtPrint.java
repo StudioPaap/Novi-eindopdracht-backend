@@ -33,6 +33,15 @@ public class DeelOpdrachtPrint extends DeelOpdracht {
         this.printshop = printshop;
 
     }
+
+    public DeelOpdrachtPrint(String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Project project, int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines) {
+        super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, project);
+        this.sizeWidthMM = sizeWidthMM;
+        this.sizeLengthMM = sizeLengthMM;
+        this.bleed = bleed;
+        this.cutLines = cutLines;
+    }
+
     //getters en setters
 
 

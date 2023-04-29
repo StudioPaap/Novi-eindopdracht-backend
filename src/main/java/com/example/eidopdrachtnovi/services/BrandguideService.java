@@ -1,8 +1,12 @@
 package com.example.eidopdrachtnovi.services;
 
 
+import com.example.eidopdrachtnovi.dtos.BrandguideDto;
+import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
 import com.example.eidopdrachtnovi.models.Brandguide;
+import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.repositories.BrandguideRepository;
+import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -17,17 +21,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class BrandguideService {
     private final Path fileStoragePath;
     private final String fileStorageLocation;
     private final BrandguideRepository brandguideRepository;
+    private final ProjectRepository projectRepository;
 
-    public BrandguideService(@Value("upload") String fileStorageLocation, BrandguideRepository brandguideRepository) {
+    public BrandguideService(@Value("upload") String fileStorageLocation, BrandguideRepository brandguideRepository, ProjectRepository projectRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
         this.fileStorageLocation = fileStorageLocation;
         this.brandguideRepository = brandguideRepository;
+        this.projectRepository = projectRepository;
 
         try {
             Files.createDirectories(fileStoragePath);
@@ -37,22 +44,34 @@ public class BrandguideService {
 
     }
 
-    public String storeFile(MultipartFile file, String uri) {
+    public BrandguideDto storeFile(MultipartFile file, String uri, Long projectId) {
 
-        String brandguide = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        String brandguidePath = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-        Path filePath = Paths.get(fileStoragePath + "/" + brandguide);
+        Path filePath = Paths.get(fileStoragePath + "/" + brandguidePath);
+       Optional <Project> pj = projectRepository.findById(projectId);
+        if (pj.isPresent()) {
+            Project pop = pj.get();
+            try {
+                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                throw new RuntimeException("Issue in storing the file", e);
+            }
+            Brandguide temp = new Brandguide(brandguidePath, file.getContentType(), uri );
+            temp.setProject(pop);
+            Brandguide brandguide =  brandguideRepository.save(temp);
 
-        try {
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException("Issue in storing the file", e);
+return tranfserToDto(brandguide);
+        } else {
+            throw new RecordNotFoundException("geen Project gevonden");
         }
-
-        brandguideRepository.save(new Brandguide(brandguide, file.getContentType(), uri));
-
-        return brandguide;
     }
+
+
+
+
+
+
 
     public Resource downLoadFile(String brandguide) {
 
@@ -71,6 +90,24 @@ public class BrandguideService {
         } else {
             throw new RuntimeException("the file doesn't exist or not readable");
         }
+    }
+
+//    public BrandguideDto getBrandguigeByProject(Long projectId){
+//
+//    Optional<Project> project = projectRepository.findById(projectId);
+//   BrandguideDto bdto = brandguideRepository.findBrandguideByProject(project);
+//
+//        return bdto;
+//}
+
+
+    public BrandguideDto tranfserToDto(Brandguide bg){
+        BrandguideDto dto = new BrandguideDto();
+        dto.setBrandguide(bg.getBrandguide());
+        dto.setContentType(bg.getContentType());
+        dto.setUri(bg.getUri());
+        dto.setProject(bg.getProject().getId());
+        return dto;
     }
 
 }

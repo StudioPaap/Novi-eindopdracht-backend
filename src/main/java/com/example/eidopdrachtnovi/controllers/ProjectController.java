@@ -1,8 +1,10 @@
 package com.example.eidopdrachtnovi.controllers;
 
+import com.example.eidopdrachtnovi.dtos.DeelOpdrachtPrintDto;
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
 import com.example.eidopdrachtnovi.models.Brandguide;
+import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.services.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -27,22 +29,26 @@ public class ProjectController {
 
 
     @GetMapping()
-    public ResponseEntity<List<ProjectDto>> getAllProjects(@RequestParam(value = "studioMember", required = false) Optional<String> studioMember) {
+    public ResponseEntity<List<ProjectDto>> getAllProjects(){
 
         List<ProjectDto> dtos;
 
-        if (studioMember.isEmpty()) {
+        dtos = projectService.getAllProjects();
 
-            dtos = projectService.getAllProjects();
-
-        } else {
-            dtos = projectService.getAllProjectsByStudioMember(studioMember.get());
-
-        }
 
         return ResponseEntity.ok().body(dtos);
 
     }
+
+
+    @GetMapping("/studio/{studioMember}")
+    public ResponseEntity<List<ProjectDto>> getAllProjectsByStudioMember(@PathVariable("studioMember")String studioMember) {
+        List<ProjectDto> pds;
+
+        pds = projectService.getAllProjectsByStudioMember(studioMember);
+        return ResponseEntity.ok().body(pds);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ProjectDto> getProject(@PathVariable("id") Long id) {

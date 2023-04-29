@@ -8,7 +8,7 @@ public class ProjectDto {
     private String date;
     private String projectManager;
     private String studioMember;
-    private Brandguide brandguide;
+
 
     public ProjectDto() {
     }
@@ -23,9 +23,7 @@ public class ProjectDto {
 
     }
 
-    public ProjectDto(Brandguide brandguide){
-        this.brandguide = brandguide;
-    }
+
 
     public Long getId() {
         return id;
@@ -47,9 +45,7 @@ public class ProjectDto {
         return studioMember;
     }
 
-    public Brandguide getBrandguide() {
-        return brandguide;
-    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -71,7 +67,5 @@ public class ProjectDto {
         this.studioMember = studioMember;
     }
 
-    public void setBrandguide(Brandguide brandguide) {
-        this.brandguide = brandguide;
-    }
+
 }

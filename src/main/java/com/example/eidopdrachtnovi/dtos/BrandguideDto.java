@@ -6,16 +6,16 @@ public class BrandguideDto {
     private String brandguide;
     private String contentType;
     private String uri;
-    private Project project;
+    private Long projectId;
 
     public BrandguideDto() {
     }
 
-    public BrandguideDto(String brandguide, String contentType, String uri, Project project) {
+    public BrandguideDto(String brandguide, String contentType, String uri, Long projectId) {
         this.brandguide = brandguide;
         this.contentType = contentType;
         this.uri = uri;
-        this.project = project;
+        this.projectId = projectId;
     }
 
     public String getBrandguide() {
@@ -30,8 +30,8 @@ public class BrandguideDto {
         return uri;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getProject() {
+        return projectId;
     }
 
     public void setBrandguide(String brandguide) {
@@ -46,7 +46,7 @@ public class BrandguideDto {
         this.uri = uri;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProject(Long projectId) {
+        this.projectId = projectId;
     }
 }

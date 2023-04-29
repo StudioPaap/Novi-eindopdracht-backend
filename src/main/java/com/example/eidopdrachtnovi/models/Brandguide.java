@@ -15,7 +15,7 @@ public class Brandguide {
     private String contentType;
     private String uri;
 
-    @OneToOne (mappedBy = "brandguide")
+    @OneToOne
     private Project project;
 
 

@@ -1,6 +1,5 @@
 package com.example.eidopdrachtnovi.controllers;
 
-import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDigitalDto;
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtPrintDto;
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtPrintInputDto;
 import com.example.eidopdrachtnovi.models.Status;
@@ -19,7 +18,6 @@ public class DeelOpdrachtPrintController {
     private final DeelOpdrachtPrintService deelOpdrachtPrintService;
 
 
-
     public DeelOpdrachtPrintController(DeelOpdrachtPrintService deelOpdrachtPrintService) {
         this.deelOpdrachtPrintService = deelOpdrachtPrintService;
     }
@@ -36,7 +34,7 @@ public class DeelOpdrachtPrintController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<DeelOpdrachtPrintDto> getDeelOpdrachtPrintById(@PathVariable("id")Long id) {
+    public ResponseEntity<DeelOpdrachtPrintDto> getDeelOpdrachtPrintById(@PathVariable("id") Long id) {
 
         DeelOpdrachtPrintDto deelOpdrachtPrintDto = deelOpdrachtPrintService.getDeelOpdrachtPrintById(id);
 
@@ -52,6 +50,8 @@ public class DeelOpdrachtPrintController {
         return ResponseEntity.ok().body(dpos);
     }
 
+
+
     @GetMapping("/project/{projectId}")
     public ResponseEntity<List<DeelOpdrachtPrintDto>> getDeelOpdrachtPrintByProject(@PathVariable("projectId") Long projectId) {
         List<DeelOpdrachtPrintDto> dpos;
@@ -59,7 +59,6 @@ public class DeelOpdrachtPrintController {
         dpos = deelOpdrachtPrintService.getDeelOpdrachtPrintByProject(projectId);
         return ResponseEntity.ok().body(dpos);
     }
-
 
 
     @PostMapping()

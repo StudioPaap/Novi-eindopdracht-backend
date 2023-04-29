@@ -17,7 +17,7 @@ public class Project {
     private String projectManager;
     private String studioMember;
 
-    @OneToOne
+    @OneToOne (mappedBy = "project")
     Brandguide brandguide;
 
     // Een default constructor

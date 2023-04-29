@@ -8,10 +8,22 @@ public class DeelOpdrachtPrintInputDto extends DeelOpdrachtInputDto {
     private int sizeWidthMM;
     @NotNull(message = "Size is requiered")
     private int sizeLengthMM;
-    @NotNull(message = "Bleed is requiered")
     private int bleed;
     private boolean cutLines;
     public Long printshop;
+
+
+
+    public DeelOpdrachtPrintInputDto(int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines) {
+        this.sizeWidthMM = sizeWidthMM;
+        this.sizeLengthMM = sizeLengthMM;
+        this.bleed = bleed;
+        this.cutLines = cutLines;
+    }
+
+    public DeelOpdrachtPrintInputDto(Long printshop) {
+        this.printshop = printshop;
+    }
 
     public int getSizeWidthMM() {
         return sizeWidthMM;

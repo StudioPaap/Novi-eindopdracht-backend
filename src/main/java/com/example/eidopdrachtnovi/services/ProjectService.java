@@ -41,14 +41,14 @@ public class ProjectService {
     }
 
     public List<ProjectDto> getAllProjectsByStudioMember(String studioMember) {
-        List<Project> pjList = projectRepository.getAllProjectsByStudioMemberEqualsIgnoreCase(studioMember);
-        List<ProjectDto> pjDtoList = new ArrayList<>();
+        List<Project> pjsmList = projectRepository.findAllByStudioMember(studioMember);
+        List<ProjectDto> pjsmDtoList = new ArrayList<>();
 
-        for (Project pj : pjList) {
-            ProjectDto dto = transferToDto(pj);
-            pjDtoList.add(dto);
+        for (Project pjsm : pjsmList) {
+            ProjectDto dto = transferToDto(pjsm);
+            pjsmDtoList.add(dto);
         }
-        return pjDtoList;
+        return pjsmDtoList;
     }
 
     public ProjectDto getProjectById(Long id) {
@@ -60,6 +60,8 @@ public class ProjectService {
             throw new RecordNotFoundException("geen Project gevonden");
         }
     }
+
+
 
 
     public ProjectDto addProject(ProjectInputDto dto) {
