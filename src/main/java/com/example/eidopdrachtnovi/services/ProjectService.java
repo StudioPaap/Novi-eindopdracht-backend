@@ -3,9 +3,10 @@ package com.example.eidopdrachtnovi.services;
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
-import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
+import com.example.eidopdrachtnovi.models.Brandguide;
+import com.example.eidopdrachtnovi.models.Printshop;
 import com.example.eidopdrachtnovi.models.Project;
-import com.example.eidopdrachtnovi.repositories.BrandguideUploadDownloadRepository;
+import com.example.eidopdrachtnovi.repositories.BrandguideRepository;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +21,10 @@ public class ProjectService {
 
 
     private static ProjectRepository projectRepository;
-    private static BrandguideUploadDownloadRepository brandguideUploadDownloadRepository;
+    private static BrandguideRepository brandguideRepository;
 
-    public ProjectService(ProjectRepository projectRepository, BrandguideUploadDownloadRepository brandguideUploadDownloadRepository) {
-        this.brandguideUploadDownloadRepository = brandguideUploadDownloadRepository;
+    public ProjectService(ProjectRepository projectRepository, BrandguideRepository brandguideRepository) {
+        this.brandguideRepository = brandguideRepository;
         this.projectRepository = projectRepository;
     }
 
@@ -40,14 +41,14 @@ public class ProjectService {
     }
 
     public List<ProjectDto> getAllProjectsByStudioMember(String studioMember) {
-        List<Project> pjList = projectRepository.getAllProjectsByStudioMemberEqualsIgnoreCase(studioMember);
-        List<ProjectDto> pjDtoList = new ArrayList<>();
+        List<Project> pjsmList = projectRepository.findAllByStudioMember(studioMember);
+        List<ProjectDto> pjsmDtoList = new ArrayList<>();
 
-        for (Project pj : pjList) {
-            ProjectDto dto = transferToDto(pj);
-            pjDtoList.add(dto);
+        for (Project pjsm : pjsmList) {
+            ProjectDto dto = transferToDto(pjsm);
+            pjsmDtoList.add(dto);
         }
-        return pjDtoList;
+        return pjsmDtoList;
     }
 
     public ProjectDto getProjectById(Long id) {
@@ -59,6 +60,8 @@ public class ProjectService {
             throw new RecordNotFoundException("geen Project gevonden");
         }
     }
+
+
 
 
     public ProjectDto addProject(ProjectInputDto dto) {
@@ -125,6 +128,9 @@ public class ProjectService {
             project.setProjectManager(dto.getProjectManager());
             project.setStudioMember(dto.getStudioMember());
 
+//            Brandguide brandguide = brandguideRepository.findById(dto.getBrandguideId());
+//            project.setBrandguide(brandguide);
+
             return project;
         }
 
@@ -134,6 +140,7 @@ public class ProjectService {
 
         dto.setId(project.getId());
         dto.setName(project.getName());
+        dto.setDate(project.getDate());
         dto.setProjectManager(project.getProjectManager());
         dto.setStudioMember(project.getStudioMember());
 

@@ -1,22 +1,16 @@
 package com.example.eidopdrachtnovi.dtos;
 
 import com.example.eidopdrachtnovi.models.DeelOpdrachtPrint;
-import com.example.eidopdrachtnovi.models.Printshop;
-import jakarta.validation.constraints.Email;
 
-public class PrintshopDto {
+public class PrintshopInputDto {
 
-    public Long id;
+
     public String name;
     public String adress;
     public String email;
     public Long phonenumber;
+    public DeelOpdrachtPrint deelOpdrachtPrint;
 
-
-
-    public Long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -34,7 +28,9 @@ public class PrintshopDto {
         return phonenumber;
     }
 
-
+    public DeelOpdrachtPrint getDeelOpdrachtPrint() {
+        return deelOpdrachtPrint;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -52,7 +48,7 @@ public class PrintshopDto {
         this.phonenumber = phonenumber;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDeelOpdrachtPrint(DeelOpdrachtPrint deelOpdrachtPrint) {
+        this.deelOpdrachtPrint = deelOpdrachtPrint;
     }
 }

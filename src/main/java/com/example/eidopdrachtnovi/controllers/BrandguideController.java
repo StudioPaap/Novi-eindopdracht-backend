@@ -1,7 +1,7 @@
 package com.example.eidopdrachtnovi.controllers;
 
-import com.example.eidopdrachtnovi.models.BrandguideUploadResponse;
-import com.example.eidopdrachtnovi.services.BrandguideUploadDownloadService;
+import com.example.eidopdrachtnovi.dtos.BrandguideDto;
+import com.example.eidopdrachtnovi.services.BrandguideService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,37 +16,33 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin
-public class BrandguideUploadDownloadController {
-    private final BrandguideUploadDownloadService service;
+public class BrandguideController {
+    private final BrandguideService brandguideService;
 
 
-    public BrandguideUploadDownloadController(BrandguideUploadDownloadService service) {
-        this.service = service;
+    public BrandguideController(BrandguideService service) {
+        this.brandguideService = service;
     }
 
     //    post for single upload
     @PostMapping("/upload")
-    BrandguideUploadResponse singleFileUpload(@RequestParam("brandguide") MultipartFile brandguide){
+    BrandguideDto singleFileUpload(@RequestParam("brandguide") MultipartFile brandguide, @RequestParam("project")Long projectId){
 
-        // next line makes url. example "http://localhost:8080/download/naam.jpg"
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(brandguide.getOriginalFilename())).toUriString();
 
         String contentType = brandguide.getContentType();
 
-        String brandguide1 = service.storeFile(brandguide, uri);
+        BrandguideDto brandguide1 = brandguideService.storeFile(brandguide, uri, projectId);
 
-        return new BrandguideUploadResponse(brandguide1, contentType, uri );
+        return brandguide1;
     }
 
-    //    get for single download
+
+
     @GetMapping("/download/{brandguide}")
     ResponseEntity<Resource> downLoadSingleFile(@PathVariable String brandguide, HttpServletRequest request) {
 
-        Resource resource = service.downLoadFile(brandguide);
-
-//        this mediaType decides witch type you accept if you only accept 1 type
-//        MediaType contentType = MediaType.IMAGE_JPEG;
-//        this is going to accept multiple types
+        Resource resource = brandguideService.downLoadFile(brandguide);
         String mimeType;
 
         try{
@@ -54,11 +50,18 @@ public class BrandguideUploadDownloadController {
         } catch (IOException e) {
             mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
         }
-
-//        for download attachment use next line
-//        return ResponseEntity.ok().contentType(contentType).header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + resource.getFilename()).body(resource);
-//        for showing image in browser
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;brandguide=" + resource.getFilename()).body(resource);
     }
+
+
+//    @GetMapping("/download/project/{projectId}")
+//    public ResponseEntity<BrandguideDto> getBrandguideByProject(@PathVariable("projectId") Long projectId) {
+//        BrandguideDto dtos;
+//
+//        dtos = brandguideService.getBrandguigeByProject(projectId);
+//        return ResponseEntity.ok().body(dtos);
+//    }
+
+
 
 }

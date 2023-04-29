@@ -2,6 +2,7 @@ package com.example.eidopdrachtnovi.controllers;
 
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtPrintDto;
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtPrintInputDto;
+import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.services.DeelOpdrachtPrintService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,6 @@ public class DeelOpdrachtPrintController {
 
 
     private final DeelOpdrachtPrintService deelOpdrachtPrintService;
-
 
 
     public DeelOpdrachtPrintController(DeelOpdrachtPrintService deelOpdrachtPrintService) {
@@ -34,12 +34,30 @@ public class DeelOpdrachtPrintController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<DeelOpdrachtPrintDto> getDeelOpdrachtPrintById(@PathVariable("id")Long id) {
+    public ResponseEntity<DeelOpdrachtPrintDto> getDeelOpdrachtPrintById(@PathVariable("id") Long id) {
 
         DeelOpdrachtPrintDto deelOpdrachtPrintDto = deelOpdrachtPrintService.getDeelOpdrachtPrintById(id);
 
         return ResponseEntity.ok().body(deelOpdrachtPrintDto);
 
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<DeelOpdrachtPrintDto>> getDeelOpdrachtPrintByStatus(@PathVariable("status") Status status) {
+        List<DeelOpdrachtPrintDto> dpos;
+
+        dpos = deelOpdrachtPrintService.getDeelOpdrachtPrintByStatus(status);
+        return ResponseEntity.ok().body(dpos);
+    }
+
+
+
+    @GetMapping("/project/{projectId}")
+    public ResponseEntity<List<DeelOpdrachtPrintDto>> getDeelOpdrachtPrintByProject(@PathVariable("projectId") Long projectId) {
+        List<DeelOpdrachtPrintDto> dpos;
+
+        dpos = deelOpdrachtPrintService.getDeelOpdrachtPrintByProject(projectId);
+        return ResponseEntity.ok().body(dpos);
     }
 
 

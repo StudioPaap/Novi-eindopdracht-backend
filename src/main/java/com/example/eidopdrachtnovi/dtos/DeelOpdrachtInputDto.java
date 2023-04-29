@@ -4,7 +4,7 @@ import com.example.eidopdrachtnovi.models.Status;
 import jakarta.validation.constraints.NotNull;
 
 public class DeelOpdrachtInputDto {
-
+    private Long id;
     private String name;
     private String kopij;
     private String deadlineFirstVersion ;
@@ -15,6 +15,9 @@ public class DeelOpdrachtInputDto {
     public Status status;
     public Long projectId;
 
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -76,5 +79,13 @@ public class DeelOpdrachtInputDto {
 
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 }
