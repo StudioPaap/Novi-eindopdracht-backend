@@ -1,7 +1,6 @@
 package com.example.eidopdrachtnovi.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 
 
 @Entity
@@ -18,9 +17,16 @@ public class Printshop {
     @OneToOne (mappedBy = "printshop")
     private DeelOpdrachtPrint deelOpdrachtPrint;
 
+    public Printshop() {
+    }
 
+    public Printshop(String name, String adress, String email, Long phonenumber) {
+        this.name = name;
+        this.adress = adress;
+        this.email = email;
+        this.phonenumber = phonenumber;
+    }
 
-    public Printshop(){};
 
 
 
@@ -31,6 +37,7 @@ public class Printshop {
         this.phonenumber = phonenumber;
         this.deelOpdrachtPrint = deelOpdrachtPrint;
     }
+
 
 
     // getters
