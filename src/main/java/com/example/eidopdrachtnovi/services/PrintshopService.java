@@ -53,7 +53,7 @@ import java.util.Optional;
 
         public PrintshopDto addPrintshop(PrintshopInputDto dto) {
 
-            Printshop dop = transferToDeelopdrachtPrint(dto);
+            Printshop dop = transferToPrintshop(dto);
             printshopRepository.save(dop);
 
             return transferToDto(dop);
@@ -91,7 +91,7 @@ import java.util.Optional;
         }
 
         // Dit is de vertaal methode van PrintshopInputDto naar Printshop.
-        public Printshop transferToDeelopdrachtPrint(PrintshopInputDto dto) {
+        public Printshop transferToPrintshop(PrintshopInputDto dto) {
             var printshop = new Printshop();
 
             printshop.setName(dto.getName());

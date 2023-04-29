@@ -1,8 +1,5 @@
 package com.example.eidopdrachtnovi.dtos;
 
-import com.example.eidopdrachtnovi.models.DeelOpdrachtPrint;
-import com.example.eidopdrachtnovi.models.Printshop;
-import jakarta.validation.constraints.Email;
 
 public class PrintshopDto {
 

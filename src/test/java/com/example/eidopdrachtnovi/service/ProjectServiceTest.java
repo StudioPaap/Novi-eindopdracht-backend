@@ -123,7 +123,7 @@ public class ProjectServiceTest {
 
 
     @Test
-    public void testDeleteProject() {
+    public void shouldDeleteProject() {
         // Arrange
         Long projectId = 1L;
 
@@ -135,7 +135,7 @@ public class ProjectServiceTest {
     }
 
     @Test
-    public void testUpdateProject() {
+    public void shouldUpdateProject() {
         // Arrange
         Long projectId = 1L;
         ProjectInputDto inputDto = new ProjectInputDto("New Name", "01-02-24", "New Manager", "New Member");
