@@ -34,7 +34,15 @@ public class Project {
 
     }
 
-// getters en setters
+    public Project( String name, String date, String projectManager, String studioMember) {
+
+        this.name = name;
+        this.date = date;
+        this.projectManager = projectManager;
+        this.studioMember = studioMember;
+    }
+
+    // getters en setters
 
 
     public Long getId() {

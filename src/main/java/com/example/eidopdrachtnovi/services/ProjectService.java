@@ -3,8 +3,6 @@ package com.example.eidopdrachtnovi.services;
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
 import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
-import com.example.eidopdrachtnovi.models.Brandguide;
-import com.example.eidopdrachtnovi.models.Printshop;
 import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.repositories.BrandguideRepository;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
@@ -102,24 +100,6 @@ public class ProjectService {
 
     }
 
-//    public void assignBrandguideToProject(String brandguide, Long ProjectId) {
-//
-//        Optional<Project> optionalProject = projectRepository.findById(ProjectId);
-//
-//        Optional<BrandguideUploadResponse> brandguideUploadResponse = brandguideUploadDownloadRepository.findByByName(brandguide);
-//
-//        if (optionalProject.isPresent() && brandguideUploadResponse.isPresent()) {
-//
-//            BrandguideUploadResponse brandguide1 = brandguideUploadResponse.get();
-//
-//            Project project = optionalProject.get();
-//
-//            project.setBrandguide(brandguide1);
-//
-//            projectRepository.save(project);
-//
-//        }
-//    }
         public Project transferToProject (ProjectInputDto dto){
             var project = new Project();
 
@@ -128,8 +108,6 @@ public class ProjectService {
             project.setProjectManager(dto.getProjectManager());
             project.setStudioMember(dto.getStudioMember());
 
-//            Brandguide brandguide = brandguideRepository.findById(dto.getBrandguideId());
-//            project.setBrandguide(brandguide);
 
             return project;
         }

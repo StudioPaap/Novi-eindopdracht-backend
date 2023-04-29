@@ -18,7 +18,12 @@ public class ProjectInputDto {
 
     private Long BrandguideId;
 
-
+    public ProjectInputDto(String name, String date, String projectManager, String studioMember) {
+        this.name = name;
+        this.date = date;
+        this.projectManager = projectManager;
+        this.studioMember = studioMember;
+    }
 
     public String getName() {
         return name;
