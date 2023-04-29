@@ -3,7 +3,6 @@ package com.example.eidopdrachtnovi.service;
 
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
-import com.example.eidopdrachtnovi.exceptions.RecordNotFoundException;
 import com.example.eidopdrachtnovi.models.Project;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import com.example.eidopdrachtnovi.services.ProjectService;
@@ -11,12 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -81,14 +79,14 @@ public class ProjectServiceTest {
 
 
     @Test
-    void  shouldGetProjectById() {
+    void shouldGetProjectById() {
 
         // Arrange
 
         String studiomember = "Anouk";
         Project p = new Project("Name", "01-02-23", "Milene", studiomember);
-       p.setId(2L);
-      Long projectId = p.getId();
+        p.setId(2L);
+        Long projectId = p.getId();
         Optional<Project> projectOptional = Optional.of(p);
 
         when(repos.findById(projectId)).thenReturn(projectOptional);
@@ -103,25 +101,25 @@ public class ProjectServiceTest {
     }
 
 
-@Test
-void shouldAddProject() {
+    @Test
+    void shouldAddProject() {
 
-    ProjectInputDto inputDto = new ProjectInputDto("Name", "01-02-23", "Milene", "Anouk");
+        ProjectInputDto inputDto = new ProjectInputDto("Name", "01-02-23", "Milene", "Anouk");
 
-    Project project = new Project("Name", "01-02-23", "Milene", "Anouk");
-    when(repos.save(any())).thenReturn(project);
+        Project project = new Project("Name", "01-02-23", "Milene", "Anouk");
+        when(repos.save(any())).thenReturn(project);
 
-    // Act
-    ProjectDto result = service.addProject(inputDto);
+        // Act
+        ProjectDto result = service.addProject(inputDto);
 
-    // Assert
-    verify(repos, times(1)).save(any());
-    assertNotNull(result);
-    assertEquals(project.getName(), result.getName());
-    assertEquals(project.getDate(), result.getDate());
-    assertEquals(project.getProjectManager(), result.getProjectManager());
-    assertEquals(project.getStudioMember(), result.getStudioMember());
-}
+        // Assert
+        verify(repos, times(1)).save(any());
+        assertNotNull(result);
+        assertEquals(project.getName(), result.getName());
+        assertEquals(project.getDate(), result.getDate());
+        assertEquals(project.getProjectManager(), result.getProjectManager());
+        assertEquals(project.getStudioMember(), result.getStudioMember());
+    }
 
 
     @Test
@@ -136,27 +134,54 @@ void shouldAddProject() {
         verify(repos, times(1)).deleteById(projectId);
     }
 
-//    @Test
-//    public void testUpdateProject() {
-//        // Arrange
-//        Long projectId = 1L;
-//        ProjectInputDto inputDto = new ProjectInputDto("New Name","01-02-24","New Manager", "New Member" );
-//
-//        Project project = new Project("Old Name", "01-02-23", "Milene", "Anouk");
-//        when(repos.findById(projectId)).thenReturn(Optional.of(project));
-//
-//        // Act
-//        ProjectDto result = service.updateProject(projectId, inputDto);
-//
-//        // Assert
-//        verify(repos, times(1)).findById(projectId);
-//        verify(repos, times(1)).save(any());
-//        assertNotNull(result);
-//        assertEquals(inputDto.getName(), result.getName());
-//        assertEquals(inputDto.getDate(), result.getDate());
-//        assertEquals(inputDto.getProjectManager(), result.getProjectManager());
-//        assertEquals(inputDto.getStudioMember(), result.getStudioMember());
-//    }
+    @Test
+    public void testUpdateProject() {
+        // Arrange
+        Long projectId = 1L;
+        ProjectInputDto inputDto = new ProjectInputDto("New Name", "01-02-24", "New Manager", "New Member");
+
+        Project project = new Project("Old Name", "01-02-23", "Milene", "Anouk");
+        project.setId(projectId);
+        when(repos.save(any())).thenReturn(project);
+        when(repos.findById(projectId)).thenReturn(Optional.of(project));
+
+        // Act
+        ProjectDto result = service.updateProject(projectId, inputDto);
+
+        // Assert
+        assertEquals(inputDto.getName(), result.getName());
+        assertEquals(inputDto.getDate(), result.getDate());
+        assertEquals(inputDto.getProjectManager(), result.getProjectManager());
+        assertEquals(inputDto.getStudioMember(), result.getStudioMember());
+    }
+
+    @Test
+    public void shouldTransferToProject() {
+
+        ProjectInputDto inputDto = new ProjectInputDto("Project 1", "2022-05-30", "Milene", "Anouk");
+
+        Project project = service.transferToProject(inputDto);
+
+        assertEquals("Project 1", project.getName());
+        assertEquals("2022-05-30", project.getDate());
+        assertEquals("Milene", project.getProjectManager());
+        assertEquals("Anouk", project.getStudioMember());
+    }
+
+    @Test
+    public void testTransferToDto() {
+        // Maak een dummy Project object
+        Project project = new Project("Project 1", "2022-05-30", "Milene", "Anouk");
+
+        // Roep de transferToDto() methode aan op de projectService met het dummy Project object
+        ProjectDto projectDto = service.transferToDto(project);
+
+        // Controleer of de eigenschappen van het geretourneerde ProjectDto object overeenkomen met de verwachte waarden
+        assertEquals("Project 1", projectDto.getName());
+        assertEquals("2022-05-30", projectDto.getDate());
+        assertEquals("Milene", projectDto.getProjectManager());
+        assertEquals("Anouk", projectDto.getStudioMember());
+    }
 
 
 }
