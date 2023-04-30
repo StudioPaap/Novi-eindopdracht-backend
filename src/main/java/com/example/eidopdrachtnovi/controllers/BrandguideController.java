@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -24,9 +25,8 @@ public class BrandguideController {
         this.brandguideService = service;
     }
 
-    //    post for single upload
     @PostMapping("/upload")
-    BrandguideDto singleFileUpload(@RequestParam("brandguide") MultipartFile brandguide, @RequestParam("project")Long projectId){
+    BrandguideDto singleFileUpload(@RequestParam("brandguide") MultipartFile brandguide, @RequestParam("project") Long projectId) {
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(brandguide.getOriginalFilename())).toUriString();
 
@@ -38,30 +38,19 @@ public class BrandguideController {
     }
 
 
-
     @GetMapping("/download/{brandguide}")
     ResponseEntity<Resource> downLoadSingleFile(@PathVariable String brandguide, HttpServletRequest request) {
 
         Resource resource = brandguideService.downLoadFile(brandguide);
         String mimeType;
 
-        try{
+        try {
             mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException e) {
             mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
         }
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;brandguide=" + resource.getFilename()).body(resource);
     }
-
-
-//    @GetMapping("/download/project/{projectId}")
-//    public ResponseEntity<BrandguideDto> getBrandguideByProject(@PathVariable("projectId") Long projectId) {
-//        BrandguideDto dtos;
-//
-//        dtos = brandguideService.getBrandguigeByProject(projectId);
-//        return ResponseEntity.ok().body(dtos);
-//    }
-
 
 
 }

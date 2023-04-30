@@ -12,10 +12,10 @@ public class PrintshopInputDto {
     public DeelOpdrachtPrint deelOpdrachtPrint;
 
     public PrintshopInputDto(String name, String adres, String emails, Long tel) {
-   this.name = name;
-   this.adress = adres;
-   this.email = emails;
-   this.phonenumber = tel;
+        this.name = name;
+        this.adress = adres;
+        this.email = emails;
+        this.phonenumber = tel;
 
 
     }

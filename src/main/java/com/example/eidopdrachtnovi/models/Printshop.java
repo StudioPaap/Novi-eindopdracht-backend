@@ -14,7 +14,7 @@ public class Printshop {
     private String email;
     private Long phonenumber;
 
-    @OneToOne (mappedBy = "printshop")
+    @OneToOne(mappedBy = "printshop")
     private DeelOpdrachtPrint deelOpdrachtPrint;
 
     public Printshop() {
@@ -28,8 +28,6 @@ public class Printshop {
     }
 
 
-
-
     public Printshop(String name, String adress, String email, Long phonenumber, DeelOpdrachtPrint deelOpdrachtPrint) {
         this.name = name;
         this.adress = adress;
@@ -37,7 +35,6 @@ public class Printshop {
         this.phonenumber = phonenumber;
         this.deelOpdrachtPrint = deelOpdrachtPrint;
     }
-
 
 
     // getters

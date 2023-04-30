@@ -2,7 +2,6 @@ package com.example.eidopdrachtnovi.controllers;
 
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDigitalDto;
 import com.example.eidopdrachtnovi.dtos.DeelOpdrachtDigitalInputDto;
-import com.example.eidopdrachtnovi.models.DeelOpdrachtDigital;
 import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.services.DeelOpdrachtDigitalService;
 import jakarta.validation.Valid;

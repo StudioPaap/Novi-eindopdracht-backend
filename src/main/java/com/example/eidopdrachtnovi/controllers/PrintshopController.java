@@ -18,24 +18,23 @@ public class PrintshopController {
     private final PrintshopService printshopService;
 
 
-
     public PrintshopController(PrintshopService printshopService) {
         this.printshopService = printshopService;
     }
 
     @GetMapping()
-    public ResponseEntity<List<PrintshopDto>>  getAllprintshops() {
+    public ResponseEntity<List<PrintshopDto>> getAllprintshops() {
 
         List<PrintshopDto> dtos;
 
-        dtos = printshopService. getAllprintshops();
+        dtos = printshopService.getAllprintshops();
 
         return ResponseEntity.ok().body(dtos);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrintshopDto> getPrintshopById(@PathVariable("id")Long id) {
+    public ResponseEntity<PrintshopDto> getPrintshopById(@PathVariable("id") Long id) {
 
         PrintshopDto printshop = printshopService.getPrintshopById(id);
 
@@ -70,8 +69,6 @@ public class PrintshopController {
 
         return ResponseEntity.ok().body(dto);
     }
-
-
 
 
 }

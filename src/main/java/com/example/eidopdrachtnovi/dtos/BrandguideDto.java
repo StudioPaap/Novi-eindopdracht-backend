@@ -1,7 +1,5 @@
 package com.example.eidopdrachtnovi.dtos;
 
-import com.example.eidopdrachtnovi.models.Project;
-
 public class BrandguideDto {
     private String brandguide;
     private String contentType;
@@ -11,12 +9,6 @@ public class BrandguideDto {
     public BrandguideDto() {
     }
 
-    public BrandguideDto(String brandguide, String contentType, String uri, Long projectId) {
-        this.brandguide = brandguide;
-        this.contentType = contentType;
-        this.uri = uri;
-        this.projectId = projectId;
-    }
 
     public String getBrandguide() {
         return brandguide;

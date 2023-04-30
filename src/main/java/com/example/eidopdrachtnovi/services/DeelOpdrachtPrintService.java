@@ -7,7 +7,6 @@ import com.example.eidopdrachtnovi.repositories.DeelOpdrachtPrintRepository;
 import com.example.eidopdrachtnovi.repositories.PrintshopRepository;
 import com.example.eidopdrachtnovi.repositories.ProjectRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -80,7 +79,6 @@ public class DeelOpdrachtPrintService {
     }
 
 
-
     public DeelOpdrachtPrintDto addDeelOpdrachtPrint(DeelOpdrachtPrintInputDto dto) {
 
         DeelOpdrachtPrint dop = transferToDeelopdrachtPrint(dto);
@@ -145,11 +143,9 @@ public class DeelOpdrachtPrintService {
         deelOpdrachtPrint.setPrintshop(printshop);
 
 
-
         return deelOpdrachtPrint;
     }
 
-    // Dit is de vertaal methode van DeelOpdrachtPrint naar DeelOpdrachtPrintDto
     public DeelOpdrachtPrintDto transferToDto(DeelOpdrachtPrint deelOpdrachtPrint) {
         DeelOpdrachtPrintDto dto = new DeelOpdrachtPrintDto();
         dto.setId(deelOpdrachtPrint.getId());

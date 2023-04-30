@@ -12,9 +12,8 @@ import java.util.Optional;
 public interface DeelOpdrachtDigitalRepository extends JpaRepository<DeelOpdrachtDigital, Long> {
 
     List<DeelOpdrachtDigital> findDeelOpdrachtDigitalByStatus(Status status);
-    List<DeelOpdrachtDigital>findDeelOpdrachtDigitalByName(String name);
 
-    List<DeelOpdrachtDigital>findDeelOpdrachtDigitalByProject(Optional<Project> project);
+    List<DeelOpdrachtDigital> findDeelOpdrachtDigitalByProject(Optional<Project> project);
 
 }
 

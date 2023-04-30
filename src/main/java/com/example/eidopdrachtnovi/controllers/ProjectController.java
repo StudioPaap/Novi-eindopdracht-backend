@@ -1,18 +1,14 @@
 package com.example.eidopdrachtnovi.controllers;
 
-import com.example.eidopdrachtnovi.dtos.DeelOpdrachtPrintDto;
+
 import com.example.eidopdrachtnovi.dtos.ProjectDto;
 import com.example.eidopdrachtnovi.dtos.ProjectInputDto;
-import com.example.eidopdrachtnovi.models.Brandguide;
-import com.example.eidopdrachtnovi.models.Status;
 import com.example.eidopdrachtnovi.services.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @RequestMapping("/project")
 @RestController
@@ -29,7 +25,7 @@ public class ProjectController {
 
 
     @GetMapping()
-    public ResponseEntity<List<ProjectDto>> getAllProjects(){
+    public ResponseEntity<List<ProjectDto>> getAllProjects() {
 
         List<ProjectDto> dtos;
 
@@ -42,7 +38,7 @@ public class ProjectController {
 
 
     @GetMapping("/studio/{studioMember}")
-    public ResponseEntity<List<ProjectDto>> getAllProjectsByStudioMember(@PathVariable("studioMember")String studioMember) {
+    public ResponseEntity<List<ProjectDto>> getAllProjectsByStudioMember(@PathVariable("studioMember") String studioMember) {
         List<ProjectDto> pds;
 
         pds = projectService.getAllProjectsByStudioMember(studioMember);
@@ -69,19 +65,6 @@ public class ProjectController {
 
     }
 
-//    @PostMapping("/{id}/brandguide")
-//
-//    public void assignBrandguideToProject(@PathVariable("id") Long projectId,
-//                                          @PathVariable("file")MultipartFile file) {
-//
-//        Brandguide brandguide = brandguideController.singleFileUpload(file);
-//
-//        projectService.assignBrandguideToProject(brandguide.getBrandguide(), projectId);
-//
-//    }
-
-
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProject(@PathVariable Long id) {
@@ -99,7 +82,6 @@ public class ProjectController {
 
         return ResponseEntity.ok().body(dto);
     }
-
 
 
 }

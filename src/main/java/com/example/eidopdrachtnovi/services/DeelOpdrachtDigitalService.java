@@ -84,7 +84,6 @@ public class DeelOpdrachtDigitalService {
         deelOpdrachtDigitalRepository.save(dod);
 
 
-
         return transferToDto(dod);
     }
 
@@ -102,8 +101,7 @@ public class DeelOpdrachtDigitalService {
 
             DeelOpdrachtDigital returnDeelopdrachtDigital = deelOpdrachtDigitalRepository.save(deelOpdrachtDigital1);
             return transferToDto(returnDeelopdrachtDigital);
-        }
-          else {
+        } else {
 
             throw new RecordNotFoundException("geen Deelopdracht gevonden");
 
@@ -178,7 +176,6 @@ public class DeelOpdrachtDigitalService {
         dto.setAnimation(deelOpdrachtDigital.isAnimation());
         dto.setProjectId(deelOpdrachtDigital.getProject().getId());
         dto.setStatus(deelOpdrachtDigital.getStatus());
-
 
 
         return dto;

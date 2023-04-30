@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface DeelOpdrachtPrintRepository extends JpaRepository<DeelOpdrachtPrint, Long> {
 
     List<DeelOpdrachtPrint> findDeelOpdrachtPrintByStatus(Status status);
+
     List<DeelOpdrachtPrint> findDeelOpdrachtPrintByProject(Optional<Project> project);
 }
 

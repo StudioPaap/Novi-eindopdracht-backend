@@ -10,7 +10,6 @@ public class PrintshopDto {
     public Long phonenumber;
 
 
-
     public Long getId() {
         return id;
     }
@@ -30,7 +29,6 @@ public class PrintshopDto {
     public Long getPhonenumber() {
         return phonenumber;
     }
-
 
 
     public void setName(String name) {

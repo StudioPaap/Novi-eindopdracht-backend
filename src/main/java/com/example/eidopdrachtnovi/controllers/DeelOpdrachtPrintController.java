@@ -51,7 +51,6 @@ public class DeelOpdrachtPrintController {
     }
 
 
-
     @GetMapping("/project/{projectId}")
     public ResponseEntity<List<DeelOpdrachtPrintDto>> getDeelOpdrachtPrintByProject(@PathVariable("projectId") Long projectId) {
         List<DeelOpdrachtPrintDto> dpos;

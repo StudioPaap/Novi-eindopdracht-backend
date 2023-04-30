@@ -7,7 +7,7 @@ public class DeelOpdrachtInputDto {
     private Long id;
     private String name;
     private String kopij;
-    private String deadlineFirstVersion ;
+    private String deadlineFirstVersion;
     private String deadlineSecVersion;
     @NotNull(message = "Deadline is required")
     private String deadlineDef;
@@ -62,7 +62,6 @@ public class DeelOpdrachtInputDto {
     public String getFeedback() {
         return feedback;
     }
-
 
 
     public Status getStatus() {
