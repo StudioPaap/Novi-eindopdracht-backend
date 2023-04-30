@@ -6,6 +6,7 @@ import com.example.eidopdrachtnovi.models.Role;
 import com.example.eidopdrachtnovi.models.User;
 import com.example.eidopdrachtnovi.repositories.RoleRepository;
 import com.example.eidopdrachtnovi.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
         User newUser = new User();
         newUser.setUsername(userDto.username);
         newUser.setPassword(passwordEncoder.encode(userDto.password));
@@ -41,8 +42,16 @@ public class UserController {
         }
         newUser.setRoles(userRoles);
 
-        userRepository.save(newUser);
+       userRepository.save(newUser);
 
-        return "Done";
+
+
+
+
+
+
+
+
+        return ResponseEntity.created(null).body(newUser);
     }
 }
