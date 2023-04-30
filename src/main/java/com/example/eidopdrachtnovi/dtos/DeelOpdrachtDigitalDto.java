@@ -8,18 +8,16 @@ public class DeelOpdrachtDigitalDto extends DeelOpdrachtDto {
     private String fileFormat;
 
 
-    // constructor
-    public DeelOpdrachtDigitalDto(){}
+    public DeelOpdrachtDigitalDto() {
+    }
 
-    //constructor 2
 
-    public DeelOpdrachtDigitalDto(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status,Long projectId, String sixePX, boolean animation, String fileFormat){
+    public DeelOpdrachtDigitalDto(long Id, String name, String kopij, String deadline1, String deadline2, String deadlineDef, String feedback, Status status, Long projectId, String sixePX, boolean animation, String fileFormat) {
         super(name, kopij, deadline1, deadline2, deadlineDef, feedback, status, projectId);
         this.sizePX = sixePX;
-        this.animation= animation;
-        this.fileFormat= fileFormat;
+        this.animation = animation;
+        this.fileFormat = fileFormat;
     }
-    //getters en setters
 
 
     public String getSizePX() {

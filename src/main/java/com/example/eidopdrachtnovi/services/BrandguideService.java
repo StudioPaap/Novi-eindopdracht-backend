@@ -49,7 +49,7 @@ public class BrandguideService {
         String brandguidePath = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
         Path filePath = Paths.get(fileStoragePath + "/" + brandguidePath);
-       Optional <Project> pj = projectRepository.findById(projectId);
+        Optional<Project> pj = projectRepository.findById(projectId);
         if (pj.isPresent()) {
             Project pop = pj.get();
             try {
@@ -57,20 +57,15 @@ public class BrandguideService {
             } catch (IOException e) {
                 throw new RuntimeException("Issue in storing the file", e);
             }
-            Brandguide temp = new Brandguide(brandguidePath, file.getContentType(), uri );
+            Brandguide temp = new Brandguide(brandguidePath, file.getContentType(), uri);
             temp.setProject(pop);
-            Brandguide brandguide =  brandguideRepository.save(temp);
+            Brandguide brandguide = brandguideRepository.save(temp);
 
-return tranfserToDto(brandguide);
+            return tranfserToDto(brandguide);
         } else {
             throw new RecordNotFoundException("geen Project gevonden");
         }
     }
-
-
-
-
-
 
 
     public Resource downLoadFile(String brandguide) {
@@ -85,23 +80,15 @@ return tranfserToDto(brandguide);
             throw new RuntimeException("Issue in reading the file", e);
         }
 
-        if(resource.exists()&& resource.isReadable()) {
+        if (resource.exists() && resource.isReadable()) {
             return resource;
         } else {
             throw new RuntimeException("the file doesn't exist or not readable");
         }
     }
 
-//    public BrandguideDto getBrandguigeByProject(Long projectId){
-//
-//    Optional<Project> project = projectRepository.findById(projectId);
-//   BrandguideDto bdto = brandguideRepository.findBrandguideByProject(project);
-//
-//        return bdto;
-//}
 
-
-    public BrandguideDto tranfserToDto(Brandguide bg){
+    public BrandguideDto tranfserToDto(Brandguide bg) {
         BrandguideDto dto = new BrandguideDto();
         dto.setBrandguide(bg.getBrandguide());
         dto.setContentType(bg.getContentType());

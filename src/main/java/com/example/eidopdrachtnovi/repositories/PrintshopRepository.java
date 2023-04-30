@@ -6,5 +6,5 @@ import com.example.eidopdrachtnovi.models.Printshop;
 
 
 public interface PrintshopRepository extends JpaRepository<Printshop, Long> {
-    Printshop getPrinterById(Long id);
+
 }

@@ -1,6 +1,5 @@
 package com.example.eidopdrachtnovi.dtos;
 
-import com.example.eidopdrachtnovi.models.Brandguide;
 
 public class ProjectDto {
     private Long id;
@@ -24,7 +23,6 @@ public class ProjectDto {
     }
 
 
-
     public Long getId() {
         return id;
     }
@@ -44,7 +42,6 @@ public class ProjectDto {
     public String getStudioMember() {
         return studioMember;
     }
-
 
 
     public void setId(Long id) {

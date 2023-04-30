@@ -60,8 +60,6 @@ public class ProjectService {
     }
 
 
-
-
     public ProjectDto addProject(ProjectInputDto dto) {
 
         Project pj = transferToProject(dto);
@@ -100,17 +98,17 @@ public class ProjectService {
 
     }
 
-        public Project transferToProject (ProjectInputDto dto){
-            var project = new Project();
+    public Project transferToProject(ProjectInputDto dto) {
+        var project = new Project();
 
-            project.setName(dto.getName());
-            project.setDate(dto.getDate());
-            project.setProjectManager(dto.getProjectManager());
-            project.setStudioMember(dto.getStudioMember());
+        project.setName(dto.getName());
+        project.setDate(dto.getDate());
+        project.setProjectManager(dto.getProjectManager());
+        project.setStudioMember(dto.getStudioMember());
 
 
-            return project;
-        }
+        return project;
+    }
 
 
     public ProjectDto transferToDto(Project project) {

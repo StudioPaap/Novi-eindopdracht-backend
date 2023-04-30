@@ -1,6 +1,5 @@
 package com.example.eidopdrachtnovi.dtos;
 
-import com.example.eidopdrachtnovi.models.Printshop;
 import jakarta.validation.constraints.NotNull;
 
 public class DeelOpdrachtPrintInputDto extends DeelOpdrachtInputDto {
@@ -13,7 +12,6 @@ public class DeelOpdrachtPrintInputDto extends DeelOpdrachtInputDto {
     public Long printshop;
 
 
-
     public DeelOpdrachtPrintInputDto(int sizeWidthMM, int sizeLengthMM, int bleed, boolean cutLines) {
         this.sizeWidthMM = sizeWidthMM;
         this.sizeLengthMM = sizeLengthMM;
@@ -21,9 +19,6 @@ public class DeelOpdrachtPrintInputDto extends DeelOpdrachtInputDto {
         this.cutLines = cutLines;
     }
 
-    public DeelOpdrachtPrintInputDto(Long printshop) {
-        this.printshop = printshop;
-    }
 
     public int getSizeWidthMM() {
         return sizeWidthMM;

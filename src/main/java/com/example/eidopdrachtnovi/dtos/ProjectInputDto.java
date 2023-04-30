@@ -3,13 +3,10 @@ package com.example.eidopdrachtnovi.dtos;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProjectInputDto {
 
     @NotNull(message = "Name is required")
-    // Type moet ingevuld verplicht worden in je JSON, je krijgt een message als je dit niet doet.
     private String name;
     @NotNull(message = "Date is required")
     private String date;

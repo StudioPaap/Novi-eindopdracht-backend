@@ -4,7 +4,7 @@ package com.example.eidopdrachtnovi.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Projects")
+@Table(name = "Projects")
 public class Project {
 
     @Id
@@ -17,16 +17,16 @@ public class Project {
     private String projectManager;
     private String studioMember;
 
-    @OneToOne (mappedBy = "project")
+    @OneToOne(mappedBy = "project")
     Brandguide brandguide;
 
-    // Een default constructor
+
     public Project() {
     }
 
-    //    // Een constructor met alle gevraagde variable
+
     public Project(String name, String date, String projectManager,
-                   String studioMember, byte[]brandguideFile) {
+                   String studioMember, byte[] brandguideFile) {
         this.name = name;
         this.date = date;
         this.projectManager = projectManager;
@@ -34,15 +34,13 @@ public class Project {
 
     }
 
-    public Project( String name, String date, String projectManager, String studioMember) {
+    public Project(String name, String date, String projectManager, String studioMember) {
 
         this.name = name;
         this.date = date;
         this.projectManager = projectManager;
         this.studioMember = studioMember;
     }
-
-    // getters en setters
 
 
     public Long getId() {
